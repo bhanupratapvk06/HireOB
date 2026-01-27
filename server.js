@@ -34,7 +34,7 @@ app.get('/',async(req,res)=>{
 
 app.use('/api/user',UserRoutes);
 app.use('/api/job',JobRoutes);
-app.use('/api/job',ApplicationRoutes);
+app.use('/api/application',ApplicationRoutes);
 
 app.listen(port,()=>{
     console.log(`Server is running on port: ${port}`);

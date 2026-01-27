@@ -3,14 +3,15 @@ const { appJob, viewApplicants, updateStatus, listAppliedJobs } = require('../co
 const upload = require('../configs/upload.js');
 const authMiddleware = require('../middlewares/auth.js');
 const checkAuth = require('../middlewares/role');
+const { applyJobLimiter } = require('../middlewares/rateLimiter.js');
 
 const router = express.Router();
 
-router.post('/apply/:jobId',authMiddleware,checkAuth('student'),upload.single("resume"),appJob);
+router.post('/apply/:jobId',authMiddleware,checkAuth('student'),upload.single("resume"),applyJobLimiter,appJob);
 router.get('/appliedJobs',authMiddleware,checkAuth('student'),listAppliedJobs);
 
 router.get('/viewApplicants/:jobId',authMiddleware,checkAuth('recruiter'),viewApplicants);
-router.patch('/updateStatus/:id',authMiddleware,checkAuth('recruiter'),updateStatus);
+router.patch('/updateApplicantStatus/:id',authMiddleware,checkAuth('recruiter'),updateStatus);
 
 
 module.exports = router;

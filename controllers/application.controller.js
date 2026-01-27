@@ -31,7 +31,7 @@ const appJob = async (req, res) => {
             });
         }
 
-        if (jobExists.company.toString() === student) {
+        if (jobExists.recruiter.toString() === student) {
             return res.status(400).json({
                 message: "You cannot apply to your own job"
             });
@@ -130,7 +130,7 @@ const viewApplicants = async (req, res) => {
             .sort({ createdAt: -1 })
             .skip(skip)
             .limit(Number(limit))
-            .populate("student", "name email")
+            .populate("student", "username email")
 
         const totalApplications = await Application.countDocuments({ job: jobId });
 
