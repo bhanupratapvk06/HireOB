@@ -1,7 +1,6 @@
 const Application = require("../models/Application");
 const Job = require("../models/Job");
 
-
 const appJob = async (req, res) => {
     try {
         const student = req.user.id;
@@ -78,8 +77,7 @@ const listAppliedJobs = async (req, res) => {
             .limit(limit)
             .populate({
                 path: "job",
-                select: "title description location stipend",
-                match: { status: "open" }
+                select: "title description location stipend appliedAt"
             });
 
 
@@ -140,7 +138,7 @@ const viewApplicants = async (req, res) => {
                 id: job._id,
                 title: job.title
             },
-            totalApplications,
+            applicationCount: totalApplications,
             currentPage: page,
             totalPages: Math.ceil(totalApplications / limit),
             applications
@@ -152,13 +150,11 @@ const viewApplicants = async (req, res) => {
     }
 }
 
-const updateStatus = async (req, res) => {
+const updateApplicationStatus = async (req, res) => {
     try {
         const { status } = req.body;
         const applicationId = req.params.id;
-        const allowedStatus = ["Applied", "Rejected", "Shortlisted"];
-
-
+        const allowedStatus = ["Submitted","Shortlisted", "Rejected", "Hired"];
 
         if (!applicationId) {
             return res.status(403).json({ message: 'Need Application ID to proceed.' });
@@ -206,6 +202,6 @@ const updateStatus = async (req, res) => {
 module.exports = {
     appJob,
     viewApplicants,
-    updateStatus,
+    updateApplicationStatus,
     listAppliedJobs
 };

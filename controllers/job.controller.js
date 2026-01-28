@@ -72,22 +72,32 @@ const createJob = async (req, res) => {
 
 const getJobsForStudent = async (req, res) => {
   try {
-
     const {
       keyword,
       location,
       jobType,
-      page,
+      page = 1,
+      datePosted,
+      applicantLimit,
       limit = 10
     } = req.query;
 
-    const query = { status: 'open' };
+    const query = { status: "open" };
 
+    // 🔍 keyword search
     if (keyword) {
       query.$or = [
         { title: { $regex: keyword, $options: "i" } },
-        { jobRole: { $regex: keyword, $options: "i" } },
+        { jobRole: { $regex: keyword, $options: "i" } }
       ];
+    }
+
+    // 📅 date filter
+    if (datePosted) {
+      const days = Number(datePosted);
+      const fromDate = new Date();
+      fromDate.setDate(fromDate.getDate() - days);
+      query.createdAt = { $gte: fromDate };
     }
 
     if (location) {
@@ -98,14 +108,43 @@ const getJobsForStudent = async (req, res) => {
       query.jobType = jobType;
     }
 
-    const currentPage = Number(page) || 1;
-    const skip = (currentPage - 1) * limit;
+    const currentPage = Number(page);
+    const perPage = Number(limit);
+    const skip = (currentPage - 1) * perPage;
 
     const jobs = await Job.find(query)
       .populate("recruiter", "name")
+      .sort({ createdAt: -1 })
       .skip(skip)
-      .limit(Number(limit))
-      .sort({ "createdAt": -1 });
+      .limit(perPage);
+
+    const jobIds = jobs.map(job => job._id);
+
+    const applications = await Application.aggregate([
+      { $match: { job: { $in: jobIds } } },
+      {
+        $group: {
+          _id: "$job",
+          count: { $sum: 1 }
+        }
+      }
+    ]);
+
+    const applicationMap = {};
+    applications.forEach(app => {
+      applicationMap[app._id.toString()] = app.count;
+    });
+
+    let jobsWithCount = jobs.map(job => ({
+      ...job.toObject(),
+      applicationCount: applicationMap[job._id.toString()] || 0
+    }));
+
+    if (applicantLimit) {
+      jobsWithCount = jobsWithCount.filter(
+        job => job.applicationCount < Number(applicantLimit)
+      );
+    }
 
     const totalJobs = await Job.countDocuments(query);
 
@@ -113,12 +152,12 @@ const getJobsForStudent = async (req, res) => {
       success: true,
       totalJobs,
       currentPage,
-      totalPages: Math.ceil(totalJobs / limit),
-      jobs
+      totalPages: Math.ceil(totalJobs / perPage),
+      jobs: jobsWithCount
     });
 
   } catch (error) {
-    console.log("Error fetching jobs:", error);
+    console.error("Error fetching jobs:", error);
     return res.status(500).json({
       message: "Internal Server Error (Get Jobs)"
     });
@@ -196,7 +235,6 @@ const editJob = async (req, res) => {
   }
 };
 
-
 const getRecruiterPostedJobs = async (req, res) => {
   try {
     const { page, limit = 10 } = req.query;
@@ -255,8 +293,6 @@ const getRecruiterPostedJobs = async (req, res) => {
     });
   }
 };
-
-
 
 const deleteJob = async (req, res) => {
   try {
