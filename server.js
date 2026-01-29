@@ -7,6 +7,7 @@ const ConnectDB = require('./configs/mongodb.js')
 const UserRoutes = require('./routes/auth.routes.js');
 const JobRoutes = require('./routes/job.routes.js');
 const ApplicationRoutes = require('./routes/application.routes.js');
+const jobExpiryCron = require('./cron/JobExpiry.js');
 dotenv.config();
 
 ConnectDB();
@@ -35,6 +36,8 @@ app.get('/',async(req,res)=>{
 app.use('/api/user',UserRoutes);
 app.use('/api/job',JobRoutes);
 app.use('/api/application',ApplicationRoutes);
+
+jobExpiryCron();
 
 app.listen(port,()=>{
     console.log(`Server is running on port: ${port}`);

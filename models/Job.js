@@ -47,7 +47,15 @@ const JobSchema = new mongoose.Schema(
             type: String,
             enum: ["open", "closed"],
             default: "open"
-        }
+        },
+        expiryDate: {
+            type: Date,
+            index: true
+        },
+        savedJobs: [{
+            type: ObjectId,
+            ref: 'Job'
+        }]
     },
     { timestamps: true }
 );

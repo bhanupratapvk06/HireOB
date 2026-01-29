@@ -13,6 +13,7 @@ const createJob = async (req, res) => {
       skills,
       experience,
       companyName,
+      expiryDate
     } = req.body;
 
     if (
@@ -41,8 +42,6 @@ const createJob = async (req, res) => {
       });
     }
 
-
-
     const job = await Job.create({
       title,
       description,
@@ -54,6 +53,7 @@ const createJob = async (req, res) => {
       experience,
       companyName,
       recruiter: req.user.id,
+      expiryDate
     });
 
     return res.status(201).json({
@@ -79,12 +79,12 @@ const getJobsForStudent = async (req, res) => {
       page = 1,
       datePosted,
       applicantLimit,
-      limit = 10
+      limit = 10,
+      expiryDate
     } = req.query;
 
     const query = { status: "open" };
 
-    // 🔍 keyword search
     if (keyword) {
       query.$or = [
         { title: { $regex: keyword, $options: "i" } },
@@ -92,7 +92,13 @@ const getJobsForStudent = async (req, res) => {
       ];
     }
 
-    // 📅 date filter
+    if(expiryDate){
+      query.$or = [
+        {expiryDate: {$gte: new Date()}},
+        {expiryDate: null}
+      ];
+    }
+
     if (datePosted) {
       const days = Number(datePosted);
       const fromDate = new Date();
