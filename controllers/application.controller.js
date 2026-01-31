@@ -1,7 +1,8 @@
-const Application = require("../models/Application");
-const Job = require("../models/Job");
+import Application from "../models/Application.js";
+import Job from "../models/Job.js";
 
-const appJob = async (req, res) => {
+
+export const appJob = async (req, res) => {
     try {
         const student = req.user.id;
         const { jobId } = req.params;
@@ -60,7 +61,7 @@ const appJob = async (req, res) => {
     }
 }
 
-const listAppliedJobs = async (req, res) => {
+export const listAppliedJobs = async (req, res) => {
     try {
         const student = req.user.id;
 
@@ -98,7 +99,7 @@ const listAppliedJobs = async (req, res) => {
     }
 };
 
-const viewApplicants = async (req, res) => {
+export const viewApplicants = async (req, res) => {
 
     try {
         const { jobId } = req.params;
@@ -150,7 +151,7 @@ const viewApplicants = async (req, res) => {
     }
 }
 
-const updateApplicationStatus = async (req, res) => {
+export const updateApplicationStatus = async (req, res) => {
     try {
         const { status } = req.body;
         const applicationId = req.params.id;
@@ -198,10 +199,3 @@ const updateApplicationStatus = async (req, res) => {
         });
     }
 }
-
-module.exports = {
-    appJob,
-    viewApplicants,
-    updateApplicationStatus,
-    listAppliedJobs
-};

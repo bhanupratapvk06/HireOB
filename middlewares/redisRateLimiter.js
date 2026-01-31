@@ -1,6 +1,6 @@
-const redis = require("../configs/redis");
+import redis from "../configs/redis.js";
 
-const redisRateLimiter = ({ windowSec, maxRequests, keyPrefix }) => {
+export const redisRateLimiter = ({ windowSec, maxRequests, keyPrefix }) => {
   return async (req, res, next) => {
     try {
       const ip = req.ip;
@@ -30,5 +30,3 @@ const redisRateLimiter = ({ windowSec, maxRequests, keyPrefix }) => {
     }
   };
 };
-
-module.exports = redisRateLimiter;

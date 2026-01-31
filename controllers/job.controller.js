@@ -1,7 +1,8 @@
-const Application = require("../models/Application");
-const Job = require("../models/Job");
+import Application from "../models/Application.js";
+import Job from "../models/Job.js";
 
-const createJob = async (req, res) => {
+
+export const createJob = async (req, res) => {
   try {
     const {
       title,
@@ -70,7 +71,7 @@ const createJob = async (req, res) => {
   }
 };
 
-const getJobsForStudent = async (req, res) => {
+export const getJobsForStudent = async (req, res) => {
   try {
     const {
       keyword,
@@ -170,7 +171,7 @@ const getJobsForStudent = async (req, res) => {
   }
 };
 
-const editJob = async (req, res) => {
+export const editJob = async (req, res) => {
   try {
     const { jobId } = req.params;
 
@@ -241,7 +242,7 @@ const editJob = async (req, res) => {
   }
 };
 
-const getRecruiterPostedJobs = async (req, res) => {
+export const getRecruiterPostedJobs = async (req, res) => {
   try {
     const { page, limit = 10 } = req.query;
     const recruiterId = req.user.id;
@@ -300,7 +301,7 @@ const getRecruiterPostedJobs = async (req, res) => {
   }
 };
 
-const deleteJob = async (req, res) => {
+export const deleteJob = async (req, res) => {
   try {
     const { jobId } = req.params;
 
@@ -337,15 +338,4 @@ const deleteJob = async (req, res) => {
       message: "Internal Server Error"
     });
   }
-};
-
-
-
-
-module.exports = {
-  createJob,
-  getJobsForStudent,
-  editJob,
-  deleteJob,
-  getRecruiterPostedJobs
 };

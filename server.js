@@ -1,13 +1,13 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
+import express from 'express';
+import cors from "cors";
+import dotenv from "dotenv";
 
-const ConnectDB = require('./configs/mongodb.js')
+import ConnectDB from "./configs/mongodb.js";
 
-const UserRoutes = require('./routes/auth.routes.js');
-const JobRoutes = require('./routes/job.routes.js');
-const ApplicationRoutes = require('./routes/application.routes.js');
-const jobExpiryCron = require('./cron/JobExpiry.js');
+import UserRoutes from "./routes/auth.routes.js";
+import JobRoutes from "./routes/job.routes.js";
+import ApplicationRoutes from "./routes/application.routes.js";
+import jobExpiryCron from "./cron/JobExpiry.js";
 dotenv.config();
 
 ConnectDB();

@@ -1,5 +1,5 @@
-const cron = require('node-cron');
-const Job = require('../models/Job');
+import cron from "node-cron";
+import Job from "../models/Job.js";
 
 const jobExpiryCron = () => {
     cron.schedule("0 * * * *", async () => {
@@ -17,4 +17,4 @@ const jobExpiryCron = () => {
     });
 }
 
-module.exports = jobExpiryCron;
+export default jobExpiryCron;

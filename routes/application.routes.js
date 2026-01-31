@@ -1,9 +1,14 @@
-const express = require('express');
-const { appJob, viewApplicants, updateApplicationStatus, listAppliedJobs } = require('../controllers/application.controller.js');
-const upload = require('../configs/upload.js');
-const authMiddleware = require('../middlewares/auth.js');
-const checkAuth = require('../middlewares/role');
-const { applyJobLimiter } = require('../middlewares/rateLimiter.js');
+import {
+  appJob,
+  viewApplicants,
+  updateApplicationStatus,
+  listAppliedJobs,
+} from "../controllers/application.controller.js";
+import express from "express";
+import upload from "../configs/upload.js";
+import {authMiddleware} from "../middlewares/auth.js";
+import {checkAuth} from "../middlewares/role.js";
+import { applyJobLimiter } from "../middlewares/rateLimiter.js";
 
 const router = express.Router();
 
@@ -14,4 +19,4 @@ router.get('/viewApplicants/:jobId',authMiddleware,checkAuth('recruiter'),viewAp
 router.patch('/updateApplicantStatus/:id',authMiddleware,checkAuth('recruiter'),updateApplicationStatus);
 
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const checkAuth = (...allowedRoles) => {
+export const checkAuth = (...allowedRoles) => {
     return (req,res,next) => {
         if(!req.user || !allowedRoles.includes(req.user.role)){
             return res.status(403).json({
@@ -8,5 +8,3 @@ const checkAuth = (...allowedRoles) => {
         next();
     };
 };
-
-module.exports = checkAuth;

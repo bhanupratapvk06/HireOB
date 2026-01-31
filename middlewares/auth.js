@@ -1,6 +1,6 @@
-const { verifyToken } = require('./token');
+import { verifyToken } from './token.js';
 
-const authMiddleware = async(req,res,next) => {
+export const authMiddleware = async(req,res,next) => {
     const authHeader = req.headers.authorization;
 
     if(!authHeader){
@@ -24,5 +24,3 @@ const authMiddleware = async(req,res,next) => {
         });
     }
 };
-
-module.exports = authMiddleware;

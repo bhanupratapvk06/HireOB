@@ -1,10 +1,13 @@
-const { createToken } = require("../middlewares/token");
-const Application = require("../models/Application");
-const Job = require("../models/Job");
-const User = require("../models/User");
-const bcrypt = require("bcryptjs");
+import { createToken } from "../middlewares/token.js";
 
-const userRegister = async (req, res) => {
+import Application from "../models/Application.js";
+import Job from "../models/Job.js";
+import User from "../models/User.js";
+
+import bcrypt from "bcryptjs";
+
+
+export const userRegister = async (req, res) => {
   const { username, email, password, mobile, role } = req.body;
 
   if (!username || !email || !password || !mobile || !role) {
@@ -59,7 +62,7 @@ const userRegister = async (req, res) => {
   }
 };
 
-const userLogin = async (req, res) => {
+export const userLogin = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -111,7 +114,7 @@ const userLogin = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   try {
     const userId = req.user.id;
     const { password } = req.body;
@@ -153,10 +156,4 @@ const deleteUser = async (req, res) => {
       message: "Internal server error (Delete User)"
     });
   }
-};
-
-module.exports = {
-  userRegister,
-  userLogin,
-  deleteUser
 };

@@ -1,16 +1,20 @@
-const express = require('express');
-const checkAuth = require('../middlewares/role.js');
-const authMiddleware = require('../middlewares/auth.js');
-const {
-    createJob,
-    getJobsForStudent,
-    editJob,
-    deleteJob
-} = require('../controllers/job.controller.js');
-const { getRecruiterPostedJobs } = require('../controllers/job.controller.js');
-const { getJobsLimiter } = require('../middlewares/rateLimiter.js');
+import express from "express";
+
+import {checkAuth} from "../middlewares/role.js";
+import {authMiddleware} from "../middlewares/auth.js";
+
+import {
+  createJob,
+  getJobsForStudent,
+  editJob,
+  deleteJob,
+  getRecruiterPostedJobs,
+} from "../controllers/job.controller.js";
+
+import { getJobsLimiter } from "../middlewares/rateLimiter.js";
 
 const router = express.Router();
+
 
 router.post('/createjob',authMiddleware,checkAuth("recruiter"),createJob);
 
@@ -22,4 +26,4 @@ router.get('/getPostedJobs',authMiddleware,checkAuth('recruiter'),getRecruiterPo
 
 router.get('/getStudentJobs',getJobsLimiter,getJobsForStudent);
 
-module.exports = router;
+export default router;

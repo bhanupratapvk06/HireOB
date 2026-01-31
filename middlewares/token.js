@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 
-const createToken = (user) => {
+export const createToken = (user) => {
     const token = jwt.sign({
         id: user._id,
         email: user.email,
@@ -13,7 +13,7 @@ const createToken = (user) => {
     return token;
 }
 
-const verifyToken = (token) => {
+export const verifyToken = (token) => {
     if (!token) {
         throw new Error("Token not provided");
     }
@@ -25,9 +25,3 @@ const verifyToken = (token) => {
         throw new Error("Invalid or expired token");
     }
 };
-
-
-module.exports = {
-    createToken,
-    verifyToken,
-}
