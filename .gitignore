@@ -1,3 +1,52 @@
-node_modules
-uploads
+# =========================
+# Node.js (Global)
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Environment Variables
+# =========================
 .env
+.env.*
+!.env.example
+
+# =========================
+# Backend
+# =========================
+backend/node_modules/
+backend/logs/
+backend/uploads/
+backend/dist/
+
+# =========================
+# Frontend
+# =========================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.*
+
+# =========================
+# OS / Editor files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDEs
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# Coverage & Cache
+# =========================
+coverage/
+.cache/
+.eslintcache
