@@ -1,0 +1,136 @@
+main {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image: url("https://images.unsplash.com/photo-1550684656-96eda9e5c632?q=80&w=687&auto=format&fit=crop");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(20px);
+    transform: scale(1.1);
+    z-index: -1;
+}
+
+
+main .content-box{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 70px;
+    color: white;
+}
+
+main .content-box .content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+main .content-box .content h3{
+    font-size: 68px;
+
+}
+main .content-box .content p{
+    font-size: 20px;
+    font-weight: 300;
+}
+
+main .search{
+    height: 70px;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 14px;
+    overflow: hidden;
+    color: gray;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+main .search div {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main .search div:not(:last-child) {
+    border-right: 1px solid gainsboro;
+}
+
+main .search div:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+    background-color: var(--accent-color);
+    color: white;
+    transition: all 0.1s ease;
+}
+
+
+main .search div:last-child:hover{
+    background-color: var(--hover-color);
+    cursor: pointer;
+}
+
+main .stats{
+    display: flex;
+    gap: 80px;
+}
+
+main .stats .stat-block{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+main .stats .stat-block .logo{
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: var(--accent-color);
+}
+
+main .companies {
+    width: 100%;
+    height: 12vh;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    background-color: black;
+}
+
+main .companies .company{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 500;
+    gap: 10px;
+}

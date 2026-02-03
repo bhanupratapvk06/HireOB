@@ -1,0 +1,41 @@
+
+.recents{
+    width: 100%;
+    padding: 50px;
+}
+
+.recents .opening{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recents .opening h1{
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.recents .opening div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.recents .opening div a{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--accent-color);
+    transition: all 0.1s ease;
+}
+
+.recents .opening div a:hover{
+    color: var(--hover-color);
+}
+
+.recents .listings{
+    margin-top: 28px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+

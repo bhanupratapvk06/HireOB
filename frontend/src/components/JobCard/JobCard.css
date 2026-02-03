@@ -1,0 +1,117 @@
+.card {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    box-shadow: 6px 2px 5px rgba(48, 150, 137, 0.15);
+    transition: all 0.5s ease;
+}
+
+.card:hover{
+    box-shadow: 6px 2px 5px rgba(55, 194, 175, 0.15);
+    transform: scale(101%);
+    cursor: pointer;
+}
+
+.card .extras {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card .extras .listed_at {
+    padding: 3px 8px;
+    background-color: var(--noty-color);
+    color: var(--accent-color);
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.card .position-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card .position-info .info h3 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+.card .position-info .info p {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.card .position-info div:first-child {
+    height: 40px;
+    width: 40px;
+    background-color: black;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.card .job-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card .job-details button {
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: white;
+    background-color: var(--accent-color);
+    box-shadow: 0px 4px 5px rgba(48, 150, 137, 0.15);
+    transition: all 0.1s ease;
+}
+
+.card .job-details button:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+}
+
+.card .job-details div {
+    display: flex;
+    gap: 30px
+}
+
+.card .job-details .detail {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.card .job-details .detail p {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--secondary-text-color);
+}
+
+.card .job-details .tags{
+    display: flex;
+    gap: 6px;
+}
+
+.card .job-details .tags .tag {
+    padding: 3px 6px;
+    background-color: var(--noty-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.card .job-details .tags .tag p {
+    font-size: 14px;
+    color: var(--secondary-text-color);
+    font-weight: 400;
+}

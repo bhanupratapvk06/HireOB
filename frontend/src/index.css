@@ -1,0 +1,22 @@
+:root {
+  --nav-color: #121314;
+  --accent-color: #309689;
+  --hover-color: #257e72;
+  --noty-color: #ebf5f4;
+  --secondary-text-color: #333333;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, Arial, sans-serif;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}

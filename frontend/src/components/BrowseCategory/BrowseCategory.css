@@ -1,0 +1,64 @@
+.bcat {
+    width: 100%;
+    padding: 50px;
+    background-color: var(--noty-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+
+.bcat .opening {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bcat .opening h1 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.bcat .categories{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+
+.bcat .categories .cat-card{
+    height: 250px;
+    width: 300px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border-radius: 16px;
+    box-shadow: 6px 2px 5px rgba(48, 150, 137, 0.15);
+    transition: all 0.2s ease;
+}
+
+.bcat .categories .cat-card:hover{
+    box-shadow: 6px 2px 5px rgba(55, 194, 175, 0.15);
+    transform: scale(101%);
+    cursor: pointer;
+}
+
+.bcat .categories .cat-card p{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.bcat .categories .cat-card div{
+    padding: 3px 6px;
+    background-color: var(--noty-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    color: var(--accent-color);
+}
