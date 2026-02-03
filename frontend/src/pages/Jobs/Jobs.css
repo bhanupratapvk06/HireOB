@@ -1,0 +1,55 @@
+.opening{
+    min-height: 45vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    font-size: 36px;
+}
+
+.job-region{
+    max-width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.job-region .search-region{
+    width: 75%;
+    margin-top: 40px;
+}
+
+.job-region .search-region .options{
+    display: flex;
+    justify-content: space-between;
+}
+.job-region .search-region .options p{
+    color: var(--secondary-text-color);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.job-region .search-region .options .sort-btn{
+    padding: 8px 10px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.job-region .search-region .options .sort-btn p{
+    color: white;
+    font-size: 18px;
+}
+
+.job-region .search-region .display-jobs{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

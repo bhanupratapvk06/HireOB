@@ -43,6 +43,9 @@ const Adv = () => {
                         <Link to='/about'>Learn more</Link>
                     </div>
                 </div>
+                <div className='cover'>
+                    {/* Cover Image */}
+                </div>
             </div>
 
             <div className='stats'>

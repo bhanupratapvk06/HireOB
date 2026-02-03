@@ -43,7 +43,7 @@ const JobCard = ({ job }) => {
 
                 <div className="tags">
                     {
-                        job.tags.map(tag => (
+                        job.tags.map((tag) => (
                             <div className="tag">
                                 <p>{tag}</p>
                             </div>
