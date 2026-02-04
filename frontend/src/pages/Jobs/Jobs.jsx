@@ -5,6 +5,7 @@ import './Jobs.css';
 import { SiAdobe, SiAsana } from 'react-icons/si';
 import { RiArrowDownSFill } from "react-icons/ri";
 import { IoArrowDown } from 'react-icons/io5';
+import TopCompany from '../../components/TopCompany/TopCompany';
 
 const Jobs = () => {
 
@@ -81,7 +82,7 @@ const Jobs = () => {
         }
     ];
     return (
-        <>
+        <div className='job-page'>
             <div className="opening">
                 <h1>Jobs</h1>
             </div>
@@ -104,7 +105,9 @@ const Jobs = () => {
                     </div>
                 </div>
             </div>
-        </>
+
+            <TopCompany/>
+        </div>
     );
 }
 
