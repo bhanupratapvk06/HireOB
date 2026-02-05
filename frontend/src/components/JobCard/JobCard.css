@@ -6,15 +6,18 @@
     gap: 16px;
     border: 1px solid rgba(0, 0, 0, 0.04);
     border-radius: 10px;
+
     box-shadow: 6px 2px 5px rgba(48, 150, 137, 0.15);
-    transition: all 0.5s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    will-change: transform;
 }
 
 .card:hover{
-    box-shadow: 6px 2px 5px rgba(55, 194, 175, 0.15);
-    transform: scale(101%);
+    box-shadow: 0 6px 16px rgba(55, 194, 175, 0.10);
+    transform: translateY(-3px);
     cursor: pointer;
 }
+
 
 .card .extras {
     width: 100%;

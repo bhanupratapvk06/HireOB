@@ -1,0 +1,280 @@
+.detail .opening{
+    min-height: 45vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    font-size: 36px;
+}
+
+.detail .detail-region{
+    padding-top: 40px;
+    width: 90%;
+    margin: auto;
+}
+
+.detail-region .title-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 60px;
+}
+
+
+.detail-region .title-section .extras {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail-region .title-section .extras .listed_at {
+    padding: 3px 8px;
+    background-color: var(--noty-color);
+    color: var(--accent-color);
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.detail-region .title-section .position-info {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.detail-region .title-section .position-info .info h3 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+
+.detail-region .title-section .position-info .info p {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.detail-region .title-section .position-info div:first-child {
+    height: 48px;
+    width: 48px;
+    background-color: black;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.detail-region .title-section .job-details {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail-region .title-section .job-details button {
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: white;
+    background-color: var(--accent-color);
+    box-shadow: 0px 4px 5px rgba(48, 150, 137, 0.15);
+    transition: all 0.1s ease;
+}
+
+.detail-region .title-section .job-details button:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+}
+
+.detail-region .title-section .job-details div {
+    display: flex;
+    gap: 30px
+}
+
+.detail-region .title-section .job-details .detail {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.detail-region .title-section .job-details .detail p {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--secondary-text-color);
+}
+
+.detail-region .title-section .job-details .tags{
+    display: flex;
+    gap: 6px;
+}
+
+.detail-region .title-section .job-details .tags .tag {
+    padding: 2px 6px;
+    background-color: var(--noty-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.detail-region .title-section .job-details .tags .tag p {
+    font-size: 14px;
+    color: var(--secondary-text-color);
+    font-weight: 400;
+}
+
+.detail-region .job-about{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+}
+
+
+.detail-region .job-about{
+    display: flex;
+    gap: 3%;
+}
+
+.detail-region .job-about .jd{
+    flex: 1;
+}
+
+.detail-region .job-about .jo{
+    width: 320px;
+}
+
+
+.detail-region .job-about .jd{
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.detail-region .job-about .jd .description{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 16px;
+}
+
+.detail-region .job-about .jd .responsibilities{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.detail-region .job-about .jd .responsibilities div{
+    display: flex;
+    gap: 3px;
+    font-size: 16px;
+}
+
+
+.detail-region .job-about .jd .skills{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 16px;
+}
+
+.detail-region .job-about .jd .skills .tags{
+    display: flex;
+    gap: 6px;
+}
+
+.detail-region .job-about .jd .skills .tags div{
+    padding: 5px 8px;
+    background-color: var(--noty-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+.detail-region .job-about .jd .skills .tags div p {
+    font-size: 14px;
+    color: var(--secondary-text-color);
+    font-weight: 400;
+}
+
+.detail-region .job-about .jd .related{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.detail-region .job-about .jd .related .holder{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.detail-region .job-about .jo{
+    width: 22%;
+    padding: 20px;
+    border-radius: 24px;
+    background-color: var(--noty-color);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.detail-region .job-about .jo h3{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+.detail-region .job-about .jo .overview{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.detail-region .job-about .jo .overview .over-card{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 12px;
+    border-radius: 12px;
+    background-color: white;
+
+    transition: all .2s ease;
+}
+
+.detail-region .job-about .jo .overview .over-card:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+
+.detail-region .job-about .jo .overview .over-card .logo{
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(48,150,137,0.12);
+    color: var(--accent-color);
+}
+
+
+.detail-region .job-about .jo .overview .over-card h4{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.detail-region .job-about .jo .overview .over-card p{
+    font-size: 13px;
+    color: rgba(0,0,0,0.6);
+}
