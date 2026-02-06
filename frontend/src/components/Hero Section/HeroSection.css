@@ -63,19 +63,28 @@ main .search{
     box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
 
-main .search div {
+
+main .search input,
+main .search select,
+main .search button{
     flex: 1;
     height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 16px;
+    font-size: 15px;
 }
 
-main .search div:not(:last-child) {
+main .search input:not(:last-child),
+main .search select:not(:last-child){
     border-right: 1px solid gainsboro;
 }
 
-main .search div:last-child {
+main .search button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,14 +92,14 @@ main .search div:last-child {
     font-weight: 500;
     background-color: var(--accent-color);
     color: white;
-    transition: all 0.1s ease;
+    transition: all 0.15s ease;
 }
 
-
-main .search div:last-child:hover{
+main .search button:hover{
     background-color: var(--hover-color);
     cursor: pointer;
 }
+
 
 main .stats{
     display: flex;

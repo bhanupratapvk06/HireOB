@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { RiUserCommunityLine } from "react-icons/ri";
 import { PiSuitcaseBold } from "react-icons/pi";
 import { FaRegBuilding } from "react-icons/fa";
@@ -8,10 +9,17 @@ import { SiAsana } from "react-icons/si";
 import { FaMeta } from "react-icons/fa6";
 import { IoSearchSharp } from "react-icons/io5";
 import './HeroSection.css';
+import assets from "../../assets/assets";
 
 
 const HeroSection = () => {
-        const stats = [
+    const [filters,setFilters] = useState({
+        keyword: "",
+        location: "",
+        category: ""
+    });
+
+    const stats = [
         { name: "Jobs", value: "25,800", logo: <PiSuitcaseBold size={30} color="white" /> },
         { name: "Candidates", value: "10,250", logo: <RiUserCommunityLine size={30} color="white" /> },
         { name: "Companies", value: "18,400", logo: <FaRegBuilding size={30} color="white" /> },
@@ -25,6 +33,18 @@ const HeroSection = () => {
         { logo: <FaMeta size={40} />, name: "Meta" }
     ];
 
+    const handleChange = (e) => {
+        setFilters({
+            ...filters,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const handleSearch = () => {
+        // Implemented Later
+        console.log("Searching with:", filters);
+    }
+
     return (
         <main className="hero">
 
@@ -35,14 +55,38 @@ const HeroSection = () => {
                 </div>
 
                 <div className="search">
-                    <div>Job Title or Company</div>
-                    <div>Select Location</div>
-                    <div>Select Category</div>
-                    <div>
-                        <IoSearchSharp color="white" size={25} />
+
+                    <input
+                        name="keyword"
+                        placeholder="Job Title or Company"
+                        value={filters.keyword}
+                        onChange={handleChange}
+                    />
+
+                    <select name="location" value={filters.location} onChange={handleChange}>
+                        <option value="">Select Location</option>
+                        <option>Remote</option>
+                        <option>California</option>
+                        <option>Stockholm</option>
+                        <option>London</option>
+                    </select>
+
+                    <select name="category" value={filters.category} onChange={handleChange}>
+                        <option value="">Select Category</option>
+                        {assets.categories.map(cat => (
+                            <option key={cat.id} value={cat.name}>
+                                {cat.name}
+                            </option>
+                        ))}
+                    </select>
+
+                    <button onClick={handleSearch}>
+                        <IoSearchSharp size={22} />
                         <p>Search Job</p>
-                    </div>
+                    </button>
+
                 </div>
+
 
                 <div className="stats">
                     {stats.map((stat) => {

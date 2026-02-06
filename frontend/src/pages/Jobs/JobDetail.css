@@ -44,6 +44,12 @@
     gap: 18px;
 }
 
+.detail-region .title-section .position-info .info{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
 .detail-region .title-section .position-info .info h3 {
     font-size: 32px;
     font-weight: 600;

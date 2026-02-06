@@ -4,6 +4,7 @@ import Jobs from './pages/Jobs/Jobs'
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer'
 import JobDetail from './pages/Jobs/JobDetail'
+import Contact from './pages/Contact/Contact'
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
         <Route path = '/' element = {<Home/>}/>
         <Route path = '/jobs' element = {<Jobs/>}/>
         <Route path='/job/:id' element={<JobDetail/>} />
+        <Route path='/contact' element={<Contact/>} />
       </Routes>
       <Footer/>
     </>

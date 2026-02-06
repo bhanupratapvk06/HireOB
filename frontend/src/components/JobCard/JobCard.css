@@ -39,6 +39,12 @@
     gap: 10px;
 }
 
+.card .position-info .info{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
 .card .position-info .info h3 {
     font-size: 24px;
     font-weight: 600;
