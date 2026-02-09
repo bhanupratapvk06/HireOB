@@ -108,9 +108,9 @@ const HeroSection = () => {
             </div>
 
             <div className="companies">
-                {companies.map((company) => {
+                {companies.map((company,index) => {
                     return (
-                        <div className="company">
+                        <div key={index} className="company">
                             <div>
                                 {company.logo}
                             </div>

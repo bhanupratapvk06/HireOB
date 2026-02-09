@@ -20,8 +20,8 @@ const NavBar = () => {
                 </ul>
 
                 <div className="navButtons">
-                    <button>Login</button>
-                    <button>Get Hired</button>
+                    <button onClick={()=> navigate('/login')}>Login</button>
+                    <button onClick={()=> navigate('/hire')}>Get Hired</button>
                 </div>
             </div>
         </nav>

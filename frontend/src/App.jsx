@@ -5,6 +5,9 @@ import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer'
 import JobDetail from './pages/Jobs/JobDetail'
 import Contact from './pages/Contact/Contact'
+import About from './pages/About/About.jsx'
+import Login from './pages/Login/Login.jsx'
+
 
 const App = () => {
 
@@ -16,6 +19,8 @@ const App = () => {
         <Route path = '/jobs' element = {<Jobs/>}/>
         <Route path='/job/:id' element={<JobDetail/>} />
         <Route path='/contact' element={<Contact/>} />
+        <Route path='/about' element = {<About/>}/>
+        <Route path='/login' element = {<Login/>}/>
       </Routes>
       <Footer/>
     </>
