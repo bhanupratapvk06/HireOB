@@ -1,4 +1,4 @@
-import {Route,Routes} from 'react-router-dom'
+import {Route,Routes,useLocation} from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Jobs from './pages/Jobs/Jobs'
 import NavBar from './components/NavBar/NavBar'
@@ -10,10 +10,12 @@ import Login from './pages/Login/Login.jsx'
 
 
 const App = () => {
+  const location = useLocation();
+  const hideLayout = location.pathname === "/login";
 
   return (
     <>
-      <NavBar/>
+      {!hideLayout && <NavBar/>}
       <Routes>
         <Route path = '/' element = {<Home/>}/>
         <Route path = '/jobs' element = {<Jobs/>}/>
@@ -22,7 +24,7 @@ const App = () => {
         <Route path='/about' element = {<About/>}/>
         <Route path='/login' element = {<Login/>}/>
       </Routes>
-      <Footer/>
+      {!hideLayout && <Footer/>}
     </>
   )
 }

@@ -1,12 +1,31 @@
 import React, { useState } from "react";
-import "./login.css";
-
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub, FaFacebookF } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import { FaFacebook } from "react-icons/fa6";
+import "./login.css";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: ""
+  });
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  }
 
   const [isRegister, setIsRegister] = useState(false);
 
@@ -27,30 +46,70 @@ const Login = () => {
           {isRegister && (
             <>
               <label>Name</label>
-              <input type="text" placeholder="Your name" />
+              <input
+                name="username"
+                type="text"
+                placeholder="Your name"
+                value={formData.username}
+                onChange={handleChange}
+              />
+
+
+              <label>Role</label>
+              <div className="role-select">
+                <button
+                  type="button"
+                  className={`role-btn ${formData.role === "jobseeker" ? "active" : ""}`}
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, role: "jobseeker" }))
+                  }
+                >
+                  Job Seeker
+                </button>
+
+                <button
+                  type="button"
+                  className={`role-btn ${formData.role === "recruiter" ? "active" : ""}`}
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, role: "recruiter" }))
+                  }
+                >
+                  Recruiter
+                </button>
+              </div>
             </>
           )}
 
           <label>Email</label>
-          <input type="email" placeholder="Johndoe@gmail.com" />
+          <input
+            name="email"
+            type="email"
+            placeholder="Johndoe@gmail.com"
+            value={formData.email}
+            onChange={handleChange}
+          />
 
           <label>Password</label>
-          <input type="password" placeholder="••••••••" />
+          <input
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            value={formData.password}
+            onChange={handleChange}
+          />
 
           {!isRegister && <p className="forgot">Forgot Password</p>}
 
-   
-          <button className="primary-btn">
+          <button onClick={handleSubmit} className="primary-btn">
             {isRegister ? "Create Account" : "Sign in"}
           </button>
 
           <div className="socials">
             <div className="circle"><FcGoogle size={20} /></div>
             <div className="circle"><FaGithub color="black" size={20} /></div>
-            <div className="circle"><FaFacebook size={20} color="#1575eb"/></div>
+            <div className="circle"><FaFacebook size={20} color="#1575eb" /></div>
           </div>
 
-   
           <button
             className="toggle-auth"
             onClick={() => setIsRegister(!isRegister)}
@@ -60,6 +119,7 @@ const Login = () => {
               : "Create an account"}
           </button>
         </div>
+
 
 
         <div className="login-right">
