@@ -1,8 +1,5 @@
 import { useLocation } from "react-router-dom";
-import "./JobDetail.css";
 import { IoBookmarkOutline, IoWalletOutline } from "react-icons/io5";
-import { FaMeta, FaSlack, FaSpotify } from "react-icons/fa6";
-import { SiAdobe, SiAsana } from "react-icons/si";
 import { PiClock } from "react-icons/pi";
 import { LuMapPin } from "react-icons/lu";
 import assets from "../../assets/assets";
@@ -11,6 +8,9 @@ import { MdOutlineStars } from "react-icons/md";
 import { LuGraduationCap } from "react-icons/lu";
 import { TiTick } from "react-icons/ti";
 import { FaRegUser } from "react-icons/fa6";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "./JobDetail.css";
 
 const JobDetail = () => {
     const location = useLocation();
@@ -20,22 +20,17 @@ const JobDetail = () => {
         return <h2>No Job Data Found</h2>;
     }
 
+    dayjs.extend(relativeTime);
 
-    const logoMap = {
-        spotify: <FaSpotify />,
-        adobe: <SiAdobe />,
-        asana: <SiAsana />,
-        meta: <FaMeta />,
-        slack: <FaSlack />
-    };
+    const formatted = dayjs(job.created_at).fromNow();
 
     const jobOverview = [
-        { logo: <FaRegUser  color="#309689"/>, name: "Job Title", content: job.title },
-        { logo: <PiClock  color="#309689"/>, name: "Job Type", content: job.jobType },
+        { logo: <FaRegUser color="#309689" />, name: "Job Title", content: job.title },
+        { logo: <PiClock color="#309689" />, name: "Job Type", content: job.jobType },
         { logo: <MdOutlineStars color="#309689" />, name: "Experience", content: job.requirements.experience },
-        { logo: <LuGraduationCap  color="#309689"/>, name: "Degree", content: job.requirements.degree },
+        { logo: <LuGraduationCap color="#309689" />, name: "Degree", content: job.requirements.degree },
         { logo: <IoWalletOutline color="#309689" />, name: "Offered Salary", content: job.salary },
-        { logo: <LuMapPin  color="#309689"/>, name: "Location", content: job.location },
+        { logo: <LuMapPin color="#309689" />, name: "Location", content: job.location },
 
     ];
 
@@ -50,7 +45,7 @@ const JobDetail = () => {
                 <div className='title-section'>
                     <div className='extras'>
                         <div className='listed_at'>
-                            <p>{job.posted_at}</p>
+                            <p>{formatted}</p>
                         </div>
 
                         <div className='bookmark'>
@@ -59,10 +54,10 @@ const JobDetail = () => {
                     </div>
 
                     <div className='position-info'>
-                        <div>{logoMap[job.logo]}</div>
+                        <div>{job.logo}</div>
                         <div className="info">
                             <h3>{job.title}</h3>
-                            <p>{job.company}</p>
+                            <p>{job.companyName}</p>
                         </div>
                     </div>
 
@@ -70,7 +65,7 @@ const JobDetail = () => {
                         <div>
                             <div className="detail">
                                 <PiClock size={22} color="#309689" />
-                                <p>{job.type}</p>
+                                <p>{job.workMode}</p>
                             </div>
                             <div className="detail">
                                 <IoWalletOutline size={22} color="#309689" />
@@ -84,7 +79,7 @@ const JobDetail = () => {
 
                         <div className="tags">
                             {
-                                job.professionalSkills.map((tag) => (
+                                job.skills.map((tag) => (
                                     <div className="tag">
                                         <p>{tag}</p>
                                     </div>
@@ -115,7 +110,7 @@ const JobDetail = () => {
                         <div className="skills">
                             <h1>Professional Skills</h1>
                             <div className="tags">
-                                {job.professionalSkills.map((skill) => (
+                                {job.skills.map((skill) => (
                                     <div>
                                         <p>{skill}</p>
                                     </div>

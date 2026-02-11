@@ -46,7 +46,7 @@ const jobs = [
   {
     id: 1,
     title: "Frontend Developer",
-    company: "Spotify",
+    companyName: "Spotify",
     logo: "spotify",
     description: "Build modern UI using React and performance best practices.",
     fullDescription:
@@ -59,7 +59,7 @@ const jobs = [
       "Maintain clean, reusable, and maintainable code."
     ],
 
-    professionalSkills: ["React", "JavaScript", "CSS", "REST APIs", "Git"],
+    skills: ["React", "JavaScript", "CSS", "REST APIs", "Git"],
 
     requirements: {
       experience: "1-3 years",
@@ -67,17 +67,17 @@ const jobs = [
     },
 
     jobType: "Full-Time",
-    type: "Remote",
+    workMode: "Remote",
     experience: "1-3 yrs",
     salary: "$9,500",
     location: "Stockholm",
-    posted_at: "2 days ago"
+    created_at: "2 days ago"
   },
 
   {
     id: 2,
     title: "Backend Engineer",
-    company: "Adobe",
+    companyName: "Adobe",
     logo: "adobe",
     description: "Design scalable APIs and microservices.",
     fullDescription:
@@ -90,7 +90,7 @@ const jobs = [
       "Collaborate with frontend and DevOps teams."
     ],
 
-    professionalSkills: ["Node.js", "MongoDB", "Microservices", "Docker", "AWS"],
+    skills: ["Node.js", "MongoDB", "Microservices", "Docker", "AWS"],
 
     requirements: {
       experience: "2-4 years",
@@ -98,17 +98,17 @@ const jobs = [
     },
 
     jobType: "Full-Time",
-    type: "Hybrid",
+    workMode: "Hybrid",
     experience: "2-4 yrs",
     salary: "$11,000",
     location: "San Jose",
-    posted_at: "1 day ago"
+    created_at: "1 day ago"
   },
 
   {
     id: 3,
     title: "Product Designer",
-    company: "Asana",
+    companyName: "Asana",
     logo: "asana",
     description: "Create intuitive UX flows and design systems.",
     fullDescription:
@@ -121,7 +121,7 @@ const jobs = [
       "Collaborate with product managers and developers."
     ],
 
-    professionalSkills: ["Figma", "UX Research", "Prototyping", "Design Systems"],
+    skills: ["Figma", "UX Research", "Prototyping", "Design Systems"],
 
     requirements: {
       experience: "1-2 years",
@@ -129,17 +129,17 @@ const jobs = [
     },
 
     jobType: "Part-Time",
-    type: "Remote",
+    workMode: "Remote",
     experience: "1-2 yrs",
     salary: "$7,200",
     location: "Remote",
-    posted_at: "3 days ago"
+    created_at: "3 days ago"
   },
 
   {
     id: 4,
     title: "SDE1",
-    company: "Meta",
+    companyName: "Meta",
     logo: "meta",
     description: "Work on large-scale distributed systems.",
     fullDescription:
@@ -152,7 +152,7 @@ const jobs = [
       "Debug and optimize system performance."
     ],
 
-    professionalSkills: ["C++", "System Design", "Data Structures", "Algorithms"],
+    skills: ["C++", "System Design", "Data Structures", "Algorithms"],
 
     requirements: {
       experience: "0-2 years",
@@ -160,17 +160,17 @@ const jobs = [
     },
 
     jobType: "Full-Time",
-    type: "Onsite",
+    workMode: "Onsite",
     experience: "0-2 yrs",
     salary: "$12,500",
     location: "California",
-    posted_at: "5 days ago"
+    created_at: "5 days ago"
   },
 
   {
     id: 5,
     title: "QA Automation Engineer",
-    company: "Slack",
+    companyName: "Slack",
     logo: "slack",
     description: "Build automated test pipelines.",
     fullDescription:
@@ -183,7 +183,7 @@ const jobs = [
       "Identify bugs and ensure release readiness."
     ],
 
-    professionalSkills: ["Selenium", "Automation Testing", "CI/CD", "JavaScript"],
+    skills: ["Selenium", "Automation Testing", "CI/CD", "JavaScript"],
 
     requirements: {
       experience: "2+ years",
@@ -191,11 +191,11 @@ const jobs = [
     },
 
     jobType: "Contract",
-    type: "Remote",
+    workMode: "Remote",
     experience: "2 yrs",
     salary: "$8,000",
     location: "Remote",
-    posted_at: "4 days ago"
+    created_at: "4 days ago"
   }
 ];
 

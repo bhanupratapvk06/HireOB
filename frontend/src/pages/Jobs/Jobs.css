@@ -1,4 +1,4 @@
-.job-page .opening{
+.job-page .opening {
     min-height: 45vh;
     width: 100%;
     display: flex;
@@ -9,7 +9,7 @@
     font-size: 36px;
 }
 
-.job-region{
+.job-region {
     max-width: 90%;
     margin: auto;
     display: flex;
@@ -17,22 +17,26 @@
     gap: 10px;
 }
 
-.job-region .search-region{
+.job-region .search-region {
+    position: relative;
     width: 75%;
-    margin-top: 40px;
+    margin: 40px auto 0 auto;
+    display: flex;
+    flex-direction: column;
 }
 
-.job-region .search-region .options{
+.job-region .search-region .options {
     display: flex;
     justify-content: space-between;
 }
-.job-region .search-region .options p{
+
+.job-region .search-region .options p {
     color: var(--secondary-text-color);
     font-size: 20px;
     font-weight: 600;
 }
 
-.job-region .search-region .options .sort-btn{
+.job-region .search-region .options .sort-btn {
     padding: 8px 10px;
     background-color: var(--accent-color);
     color: white;
@@ -42,14 +46,66 @@
     gap: 2px;
 }
 
-.job-region .search-region .options .sort-btn p{
+.job-region .search-region .options .sort-btn p {
     color: white;
     font-size: 18px;
 }
 
-.job-region .search-region .display-jobs{
+.job-region .search-region .display-jobs {
     margin-top: 20px;
+    /* height: 600px; */
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     gap: 20px;
+}
+
+
+.search-region .pagination {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    margin-top: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.pagination .pageNo {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+    border: none;
+    background-color: #daedea;
+
+    display: grid;
+    place-content: center;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: transform 0.25s ease,
+                background-color 0.25s ease,
+                box-shadow 0.25s ease;
+
+    box-shadow: 0 4px 10px rgba(48,150,137,0.10);
+}
+
+.pagination .pageNo:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.pagination .pageNo.active {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: 600;
 }
