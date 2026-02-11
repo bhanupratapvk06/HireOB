@@ -8,9 +8,9 @@ import bcrypt from "bcryptjs";
 
 
 export const userRegister = async (req, res) => {
-  const { username, email, password, mobile, role } = req.body;
+  const { username, email, password, role } = req.body;
 
-  if (!username || !email || !password || !mobile || !role) {
+  if (!username || !email || !password || !role) {
     return res.status(400).json({
       message: "Please enter all fields"
     });
@@ -32,7 +32,6 @@ export const userRegister = async (req, res) => {
       username,
       email: emailLower,
       password: hashedPassword,
-      mobile,
       role
     });
 
@@ -43,13 +42,12 @@ export const userRegister = async (req, res) => {
 
     return res.status(201).json({
       success: true,
-      message: "User registered successfully",
+      message: "User registered successfully!",
       token,
       user: {
         id: user._id,
         username: user.username,
         email: user.email,
-        mobile: user.mobile,
         role: user.role
       }
     });
@@ -57,7 +55,7 @@ export const userRegister = async (req, res) => {
   } catch (error) {
     console.error("Register error:", error);
     return res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error while registering."
     });
   }
 };
@@ -96,7 +94,7 @@ export const userLogin = async (req, res) => {
     });
 
     return res.status(200).json({
-      message: "Login successful",
+      message: "User LoggedIn successfully!",
       token,
       user: {
         id: user._id,

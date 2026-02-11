@@ -1,65 +1,99 @@
 import mongoose from "mongoose";
 
 const JobSchema = new mongoose.Schema(
-    {
-        title: {
-            type: String,
-            required: true
-        },
-        description: {
-            type: String,
-            required: true
-        },
-        jobRole: {
-            type: String,
-            required: true
-        },
-        location: {
-            type: String,
-            required: true
-        },
-        stipend: {
-            type: Number,
-            required: true
-        },
-        jobType: {
-            type: String,
-            required: true
-        },
-        skills: {
-            type: [String],
-            required: true
-        },
-        experience: {
-            type: Number,
-            default: 0
-        },
-        companyName: {
-            type: String,
-            required: true
-        },
-        recruiter: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-            required: true
-        },
-        status: {
-            type: String,
-            enum: ["open", "closed"],
-            default: "open"
-        },
-        expiryDate: {
-            type: Date,
-            index: true
-        },
-        savedJobs: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Job'
-        }]
+  {
+    title: {
+      type: String,
+      required: true
     },
-    { timestamps: true }
+
+    companyName: {
+      type: String,
+      required: true
+    },
+
+    logo: {
+      type: String
+    },
+
+    description: {
+      type: String,
+      required: true
+    },
+
+    fullDescription: {
+      type: String
+    },
+
+    responsibilities: {
+      type: [String],
+      default: []
+    },
+
+    skills: {
+      type: [String],
+      required: true
+    },
+
+    requirements: {
+      experience: {
+        type: String
+      },
+      degree: {
+        type: String
+      }
+    },
+
+    jobType: {
+      type: String,
+      required: true
+    },
+
+    workMode: {
+      type: String,
+      default: "Onsite"
+    },
+
+    experience: {
+      type: Number,
+      default: 0
+    },
+
+    salary: {
+      type: String 
+    },
+
+    location: {
+      type: String,
+      required: true
+    },
+
+    recruiter: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    },
+
+    status: {
+      type: String,
+      enum: ["open", "closed"],
+      default: "open"
+    },
+
+    expiryDate: {
+      type: Date,
+      index: true
+    },
+
+    savedJobs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Job"
+      }
+    ]
+  },
+  { timestamps: true }
 );
 
 const Job = mongoose.model("Job", JobSchema);
-
 export default Job;

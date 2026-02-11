@@ -21,14 +21,13 @@ const UserSchema = new mongoose.Schema(
     },
     mobile: {
       type: String,
-      required: true,
       unique: true,
       minlength: 10,
       maxlength: 10
     },
     role: {
       type: String,
-      enum: ["student", "recruiter"],
+      enum: ["jobseeker", "recruiter"],
       required: true
     }
   },

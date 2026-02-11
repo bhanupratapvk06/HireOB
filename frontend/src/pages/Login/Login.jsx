@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from 'axios';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
-import { FaFacebook } from "react-icons/fa6";
+import { FaEye, FaEyeSlash, FaFacebook } from "react-icons/fa6";
 import "./login.css";
 
 const Login = () => {
@@ -11,6 +12,9 @@ const Login = () => {
     email: "",
     password: ""
   });
+  const [isRegister, setIsRegister] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -21,13 +25,39 @@ const Login = () => {
       [name]: value
     }));
   }
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-  }
 
-  const [isRegister, setIsRegister] = useState(false);
+    const endpoint = isRegister ? "register" : "login";
+
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/api/user/${endpoint}`,
+        formData
+      );
+
+      if (res.status === 200 || res.status === 201) {
+        console.log(res.data.message);
+        if(res.data.token) localStorage.setItem('token',res.data.token);
+
+        // optional: redirect or store token
+        // localStorage.setItem("token", res.data.token);
+        // navigate("/");
+      }
+
+    } catch (error) {
+      const message =
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong";
+
+      console.log(
+        `${isRegister ? "Registration" : "Login"} failed: ${message}`
+      );
+    }
+  };
+
+
 
   return (
     <div className="login-wrapper">
@@ -90,13 +120,18 @@ const Login = () => {
           />
 
           <label>Password</label>
-          <input
-            name="password"
-            type="password"
-            placeholder="••••••••"
-            value={formData.password}
-            onChange={handleChange}
-          />
+          <div className="password-wrapper">
+            <input
+              name="password"
+              type={!showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+            </span>
+          </div>
 
           {!isRegister && <p className="forgot">Forgot Password</p>}
 

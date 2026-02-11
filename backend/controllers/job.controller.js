@@ -7,25 +7,27 @@ export const createJob = async (req, res) => {
     const {
       title,
       description,
-      jobRole,
+      fullDescription,
+      responsibilities,
       location,
-      stipend,
+      salary,
       jobType,
       skills,
       experience,
       companyName,
+      logo,
+      requirements,
+      workMode,
       expiryDate
     } = req.body;
 
     if (
       !title ||
       !description ||
-      !jobRole ||
       !location ||
       !jobType ||
       !companyName ||
-      stipend === undefined ||
-      experience === undefined ||
+      !salary ||
       !Array.isArray(skills) ||
       skills.length === 0
     ) {
@@ -34,25 +36,20 @@ export const createJob = async (req, res) => {
       });
     }
 
-    if (
-      typeof stipend !== "number" ||
-      typeof experience !== "number"
-    ) {
-      return res.status(400).json({
-        message: "Stipend and experience must be numbers."
-      });
-    }
-
     const job = await Job.create({
       title,
       description,
-      jobRole,
+      fullDescription,
+      responsibilities,
       location,
-      stipend,
+      salary,
       jobType,
       skills,
       experience,
       companyName,
+      logo,
+      requirements,
+      workMode,
       recruiter: req.user.id,
       expiryDate
     });
@@ -71,6 +68,7 @@ export const createJob = async (req, res) => {
   }
 };
 
+
 export const getJobsForStudent = async (req, res) => {
   try {
     const {
@@ -87,16 +85,17 @@ export const getJobsForStudent = async (req, res) => {
     const query = { status: "open" };
 
     if (keyword) {
-      query.$or = [
-        { title: { $regex: keyword, $options: "i" } },
-        { jobRole: { $regex: keyword, $options: "i" } }
-      ];
+      query.title = { $regex: keyword, $options: "i" };
     }
 
-    if(expiryDate){
-      query.$or = [
-        {expiryDate: {$gte: new Date()}},
-        {expiryDate: null}
+    if (expiryDate) {
+      query.$and = [
+        {
+          $or: [
+            { expiryDate: { $gte: new Date() } },
+            { expiryDate: null }
+          ]
+        }
       ];
     }
 
@@ -171,6 +170,7 @@ export const getJobsForStudent = async (req, res) => {
   }
 };
 
+
 export const editJob = async (req, res) => {
   try {
     const { jobId } = req.params;
@@ -213,13 +213,18 @@ export const editJob = async (req, res) => {
     const allowedFields = [
       "title",
       "description",
-      "stipend",
+      "fullDescription",
+      "salary",
       "location",
-      "jobRole",
       "experience",
       "skills",
-      "status"
+      "status",
+      "responsibilities",
+      "requirements",
+      "workMode",
+      "logo"
     ];
+
 
     allowedFields.forEach(field => {
       if (req.body[field] !== undefined) {
