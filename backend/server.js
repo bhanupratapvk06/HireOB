@@ -1,11 +1,10 @@
 import express from 'express';
 import cors from "cors";
 import dotenv from "dotenv";
-
 import ConnectDB from "./configs/mongodb.js";
-
 import UserRoutes from "./routes/auth.routes.js";
 import JobRoutes from "./routes/job.routes.js";
+import OtpRoutes from "./routes/otp.routes.js";
 import ApplicationRoutes from "./routes/application.routes.js";
 import jobExpiryCron from "./cron/JobExpiry.js";
 dotenv.config();
@@ -34,6 +33,7 @@ app.get('/',async(req,res)=>{
 });
 
 app.use('/api/user',UserRoutes);
+app.use('/api/otp',OtpRoutes);
 app.use('/api/job',JobRoutes);
 app.use('/api/application',ApplicationRoutes);
 

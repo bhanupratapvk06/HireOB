@@ -2,6 +2,7 @@ import { createToken } from "../middlewares/token.js";
 
 import Application from "../models/Application.js";
 import Job from "../models/Job.js";
+import Otp from "../models/Otp.js";
 import User from "../models/User.js";
 
 import bcrypt from "bcryptjs";
@@ -17,6 +18,15 @@ export const userRegister = async (req, res) => {
   }
 
   try {
+    const allowedRoles = ["jobseeker", "recruiter"];
+
+    if (!allowedRoles.includes(role)) {
+      return res.status(400).json({
+        message: "Invalid role"
+      });
+    }
+
+
     const emailLower = email.toLowerCase();
 
     const existingUser = await User.findOne({ email: emailLower });
@@ -25,6 +35,19 @@ export const userRegister = async (req, res) => {
         message: "User already exists"
       });
     }
+
+    const otpVerified = await Otp.findOne({
+      email: emailLower,
+      verified: true
+    });
+
+
+    if (!otpVerified) {
+      return res.status(403).json({
+        message: "Please verify OTP first"
+      });
+    }
+
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -39,6 +62,9 @@ export const userRegister = async (req, res) => {
       id: user._id,
       role: user.role
     });
+
+    await Otp.deleteMany({ email: emailLower });
+
 
     return res.status(201).json({
       success: true,
