@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { IoBookmarkOutline, IoNavigate, IoWalletOutline } from "react-icons/io5";
 import { PiClock } from "react-icons/pi";
 import { LuMapPin } from "react-icons/lu";

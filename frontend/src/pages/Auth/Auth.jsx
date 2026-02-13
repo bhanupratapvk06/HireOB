@@ -2,11 +2,13 @@ import { useState } from "react";
 import axios from 'axios';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
-import { FaEye, FaEyeSlash, FaFacebook } from "react-icons/fa6";
-import "./login.css";
+import { FaArrowRightLong, FaEye, FaEyeSlash, FaFacebook } from "react-icons/fa6";
+import "./Auth.css";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+
+const Auth = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -14,6 +16,41 @@ const Login = () => {
   });
   const [isRegister, setIsRegister] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp,setOtp] = useState("");
+
+
+  const handleSendOtp = async () => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/otp/sendOTP", {
+        email: formData.email
+      });
+
+      if (res.status === 200) {
+        setOtpSent(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/otp/verifyOTP", {
+        email: formData.email,
+        otp
+      });
+
+      if (res.status === 200) {
+        setEmailVerified(true);
+        setOtpSent(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
 
   const handleChange = (e) => {
@@ -25,6 +62,7 @@ const Login = () => {
       [name]: value
     }));
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,7 +76,7 @@ const Login = () => {
 
       if (res.status === 200 || res.status === 201) {
         console.log(res.data.message);
-        if(res.data.token) localStorage.setItem('token',res.data.token);
+        if (res.data.token) localStorage.setItem('token', res.data.token);
 
         // optional: redirect or store token
         // localStorage.setItem("token", res.data.token);
@@ -59,12 +97,39 @@ const Login = () => {
 
 
 
+
+
+
   return (
     <div className="login-wrapper">
       <div className="login-container">
 
+        <div className="left-portion">
+          <div className="overlay-content">
 
-        <div className="login-left">
+            <div className="top">
+              <div className="logo">
+                <h2>HireOB</h2>
+              </div>
+
+              <div onClick={() => navigate('/')} className="back-btn">
+                <p>Back to Home</p>
+                <FaArrowRightLong color="white" size={16} />
+              </div>
+            </div>
+
+            <div className="down">
+              <h1>
+                Capturing Moments,<br />
+                Creating Memories
+              </h1>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div className="right-portion">
           <h2 className="logo">HireOB</h2>
 
           <p className="subtitle">
@@ -111,13 +176,54 @@ const Login = () => {
           )}
 
           <label>Email</label>
-          <input
-            name="email"
-            type="email"
-            placeholder="Johndoe@gmail.com"
-            value={formData.email}
-            onChange={handleChange}
-          />
+
+          <div className="email-wrapper">
+            <input
+              name="email"
+              type="email"
+              placeholder="Johndoe@gmail.com"
+              value={formData.email}
+              disabled={emailVerified}
+              onChange={handleChange}
+            />
+
+            {isRegister && !emailVerified && (
+              <button
+                type="button"
+                className="verify-btn"
+                onClick={handleSendOtp}
+                disabled={!formData.email}
+              >
+                Verify
+              </button>
+            )}
+          </div>
+
+          {isRegister && emailVerified && (
+            <p className="verified-text">Email Verified ✓</p>
+          )}
+
+
+          {otpSent && !emailVerified && (
+            <>
+              <label>Enter OTP</label>
+              <input
+                type="text"
+                placeholder="6-digit code"
+                onChange={(e) => setOtp(e.target.value)}
+              />
+
+              <button
+                type="button"
+                className="verify-otp-btn"
+                onClick={handleVerifyOtp}
+              >
+                Confirm OTP
+              </button>
+            </>
+          )}
+
+
 
           <label>Password</label>
           <div className="password-wrapper">
@@ -134,6 +240,7 @@ const Login = () => {
           </div>
 
           {!isRegister && <p className="forgot">Forgot Password</p>}
+
 
           <button onClick={handleSubmit} className="primary-btn">
             {isRegister ? "Create Account" : "Sign in"}
@@ -154,39 +261,9 @@ const Login = () => {
               : "Create an account"}
           </button>
         </div>
-
-
-
-        <div className="login-right">
-          <div className="testimonial">
-            <h1>What’s our Jobseekers Said.</h1>
-
-            <p className="quote">
-              “Search and find your dream job is now easier than ever.
-              Just browse a job and apply if you need to.”
-            </p>
-
-            <h3>Mas Parjono</h3>
-            <span className="role">UI Designer at Google</span>
-
-            <div className="arrows">
-              <button className="arrow light"><HiArrowLeft /></button>
-              <button className="arrow dark"><HiArrowRight /></button>
-            </div>
-
-            <div className="bottom-card">
-              <h4>Get your right job and right place apply now</h4>
-              <p>
-                Be among the first founders to experience the easiest way to start
-                run a business.
-              </p>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Auth;

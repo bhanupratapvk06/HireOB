@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema(
     },
     mobile: {
       type: String,
+      default: undefined,
       unique: true,
       sparse: true
     },

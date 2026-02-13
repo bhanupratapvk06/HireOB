@@ -6,7 +6,7 @@ import Footer from './components/Footer/Footer'
 import JobDetail from './pages/Jobs/JobDetail'
 import Contact from './pages/Contact/Contact'
 import About from './pages/About/About.jsx'
-import Login from './pages/Login/Login.jsx'
+import Auth from './pages/Auth/Auth.jsx'
 
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
         <Route path='/job/:id' element={<JobDetail/>} />
         <Route path='/contact' element={<Contact/>} />
         <Route path='/about' element = {<About/>}/>
-        <Route path='/login' element = {<Login/>}/>
+        <Route path='/login' element = {<Auth/>}/>
       </Routes>
       {!hideLayout && <Footer/>}
     </>

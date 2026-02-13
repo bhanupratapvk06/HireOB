@@ -14,8 +14,7 @@ main::before {
     content: "";
     position: absolute;
     inset: 0;
-
-    background-image: url("https://images.unsplash.com/photo-1550684656-96eda9e5c632?q=80&w=687&auto=format&fit=crop");
+    background-image: url("https://images.unsplash.com/photo-1763973559043-ee687e8df328?q=80&w=1332&auto=format&fit=crop");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
