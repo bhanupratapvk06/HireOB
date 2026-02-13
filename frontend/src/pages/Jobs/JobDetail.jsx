@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useJob } from "../../context/JobContext";
 import { IoBookmarkOutline, IoWalletOutline } from "react-icons/io5";
 import { PiClock } from "react-icons/pi";
@@ -17,6 +17,7 @@ import Loader from "../../components/Loader/Loader";
 const JobDetail = () => {
     const { jobs, loading, fetchJobs } = useJob();
     const location = useLocation();
+    const navigate = useNavigate();
     const job = location.state;
 
     if (!job) {
@@ -94,8 +95,16 @@ const JobDetail = () => {
                             }
                         </div>
 
+                        <button
+                            onClick={() =>
+                                navigate(`/application/${job._id}`, {
+                                    state: { job }
+                                })
+                            }
+                        >
+                            Apply Job
+                        </button>
 
-                        <button>Apply Job</button>
                     </div>
                 </div>
 
