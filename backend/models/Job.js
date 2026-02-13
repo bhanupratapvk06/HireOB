@@ -60,7 +60,7 @@ const JobSchema = new mongoose.Schema(
     },
 
     salary: {
-      type: String 
+      type: String
     },
 
     location: {
@@ -68,11 +68,36 @@ const JobSchema = new mongoose.Schema(
       required: true
     },
 
+    sourceType: {
+      type: String,
+      enum: ["internal", "external"],
+      lowercase: true,
+      required: true,
+      index: true
+    },
+
+
+    externalUrl: {
+      type: String,
+      required: function () {
+        return this.sourceType === "external";
+      }
+    },
+
+
+    sourcePlatform: {
+      type: String
+    },
+
     recruiter: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: function () {
+        return this.sourceType === "internal";
+      },
+      index: true
     },
+
 
     status: {
       type: String,
@@ -85,12 +110,15 @@ const JobSchema = new mongoose.Schema(
       index: true
     },
 
-    savedJobs: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Job"
-      }
-    ]
+    views: {
+      type: Number,
+      default: 0
+    },
+
+    redirectClicks: {
+      type: Number,
+      default: 0
+    }
   },
   { timestamps: true }
 );

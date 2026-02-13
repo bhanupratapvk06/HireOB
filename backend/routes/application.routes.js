@@ -1,5 +1,5 @@
 import {
-  appJob,
+  applyJob,
   viewApplicants,
   updateApplicationStatus,
   listAppliedJobs,
@@ -12,7 +12,7 @@ import { applyJobLimiter } from "../middlewares/rateLimiter.js";
 
 const router = express.Router();
 
-router.post('/apply/:jobId',authMiddleware,checkAuth('student'),upload.single("resume"),applyJobLimiter,appJob);
+router.post('/apply/:jobId',authMiddleware,checkAuth('student'),upload.single("resume"),applyJobLimiter,applyJob);
 router.get('/appliedJobs',authMiddleware,checkAuth('student'),listAppliedJobs);
 
 router.get('/viewApplicants/:jobId',authMiddleware,checkAuth('recruiter'),viewApplicants);

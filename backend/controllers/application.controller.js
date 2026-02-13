@@ -2,7 +2,7 @@ import Application from "../models/Application.js";
 import Job from "../models/Job.js";
 
 
-export const appJob = async (req, res) => {
+export const applyJob = async (req, res) => {
     try {
         const student = req.user.id;
         const { jobId } = req.params;
@@ -17,13 +17,17 @@ export const appJob = async (req, res) => {
             });
         }
 
-        const resumePath = req.file.path;
-
 
         const jobExists = await Job.findById(jobId);
         if (!jobExists) {
             return res.status(404).json({
                 message: "Job not found"
+            });
+        }
+
+        if (jobExists.sourceType === "external") {
+            return res.status(400).json({
+                message: "External jobs must be tracked, not applied internally."
             });
         }
 
@@ -39,12 +43,13 @@ export const appJob = async (req, res) => {
             });
         }
 
-        if (jobExists.recruiter.toString() === student) {
+        if (jobExists.recruiter && jobExists.recruiter.toString() === student) {
             return res.status(400).json({
                 message: "You cannot apply to your own job"
             });
         }
 
+        const resumePath = req.file.path;
 
         const alreadyApplied = await Application.findOne({
             student: student,
@@ -58,6 +63,7 @@ export const appJob = async (req, res) => {
         }
         const application = await Application.create({
             student: student,
+            recruiter: jobExists.recruiter,
             job: jobId,
             resume: resumePath
         });
@@ -75,17 +81,19 @@ export const listAppliedJobs = async (req, res) => {
 
         const page = Number(req.query.page) || 1;
         const limit = Number(req.query.limit) || 10;
-        const skip = (page - 1) * limit;
+        const perPage = Number(limit);
+        const skip = (page - 1) * perPage;
 
         const totalApplications = await Application.countDocuments({ student });
 
         const applications = await Application.find({ student })
             .sort({ createdAt: -1 })
             .skip(skip)
-            .limit(limit)
+            .limit(perPage)
             .populate({
                 path: "job",
-                select: "title description location salary companyName"
+                select: "title description location salary companyName sourceType"
+
             });
 
         return res.status(200).json({
@@ -132,13 +140,16 @@ export const viewApplicants = async (req, res) => {
             });
         }
 
-        const applications = await Application.find({ job: jobId })
+        const applications = await Application.find({ job: jobId, recruiter: req.user.id })
             .sort({ createdAt: -1 })
             .skip(skip)
             .limit(Number(limit))
             .populate("student", "username email")
 
-        const totalApplications = await Application.countDocuments({ job: jobId });
+        const totalApplications = await Application.countDocuments({
+            job: jobId,
+            recruiter: req.user.id
+        });
 
         return res.status(200).json({
             success: true,
@@ -162,21 +173,26 @@ export const updateApplicationStatus = async (req, res) => {
     try {
         const { status } = req.body;
         const applicationId = req.params.id;
-        const allowedStatus = ["Submitted", "Shortlisted", "Rejected", "Hired"];
+        const allowedStatus = [
+            "Submitted",
+            "Viewed",
+            "Shortlisted",
+            "Interview",
+            "Rejected",
+            "Hired"
+        ];
 
         if (!applicationId) {
             return res.status(403).json({ message: 'Need Application ID to proceed.' });
         }
 
-        if (!status) {
-            return res.status(400).json({ message: 'Fill the status.' });
-        }
-
         if (!allowedStatus.includes(status)) {
-            return res.status(400).json({ message: "Invalid application status." });
+            return res.status(400).json({
+                message: "Invalid application status."
+            });
         }
 
-        const application = await Application.findById(applicationId).populate('job');
+        const application = await Application.findById(applicationId)
 
         if (!application) {
             return res.status(404).json({
@@ -184,13 +200,15 @@ export const updateApplicationStatus = async (req, res) => {
             });
         }
 
-        if (application.job.recruiter.toString() !== req.user.id) {
+        if (application.recruiter.toString() !== req.user.id) {
             return res.status(403).json({
                 message: "You are not authorized to update this application"
             });
         }
 
         application.status = status;
+        application.updatedByRecruiterAt = new Date();
+
         await application.save();
 
         return res.status(200).json({

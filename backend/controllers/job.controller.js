@@ -18,23 +18,30 @@ export const createJob = async (req, res) => {
       logo,
       requirements,
       workMode,
-      expiryDate
+      expiryDate,
+      sourceType,
+      externalUrl,
+      sourcePlatform
     } = req.body;
 
-    if (
-      !title ||
-      !description ||
-      !location ||
-      !jobType ||
-      !companyName ||
-      !salary ||
-      !Array.isArray(skills) ||
-      skills.length === 0
-    ) {
+    if (!title || !description || !location || !jobType || !companyName) {
       return res.status(400).json({
         message: "Please enter all required fields."
       });
     }
+
+    if (sourceType === "external" && !externalUrl) {
+      return res.status(400).json({
+        message: "External jobs must include externalUrl"
+      });
+    }
+
+    if (!["internal", "external"].includes(sourceType)) {
+      return res.status(400).json({
+        message: "Invalid sourceType"
+      });
+    }
+
 
     const job = await Job.create({
       title,
@@ -50,8 +57,11 @@ export const createJob = async (req, res) => {
       logo,
       requirements,
       workMode,
-      recruiter: req.user.id,
-      expiryDate
+      expiryDate,
+      sourceType,
+      externalUrl,
+      sourcePlatform,
+      recruiter: sourceType === "internal" ? req.user.id : undefined
     });
 
     return res.status(201).json({
@@ -67,6 +77,7 @@ export const createJob = async (req, res) => {
     });
   }
 };
+
 
 
 export const getJobsForStudent = async (req, res) => {
@@ -87,6 +98,8 @@ export const getJobsForStudent = async (req, res) => {
     if (keyword) {
       query.title = { $regex: keyword, $options: "i" };
     }
+
+
 
     if (expiryDate) {
       query.$and = [
@@ -181,6 +194,12 @@ export const editJob = async (req, res) => {
 
     const job = await Job.findById(jobId);
 
+    if (job.sourceType === "external") {
+      return res.status(400).json({
+        message: "External jobs cannot be edited"
+      });
+    }
+
     if (!job) {
       return res.status(404).json({
         message: "Job not found"
@@ -255,7 +274,7 @@ export const getRecruiterPostedJobs = async (req, res) => {
     const currentPage = Number(page) || 1;
     const skip = (currentPage - 1) * limit;
 
-    const jobs = await Job.find({ recruiter: recruiterId })
+    const jobs = await Job.find({ recruiter: recruiterId, sourceType: "internal" })
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(Number(limit));
@@ -316,6 +335,8 @@ export const deleteJob = async (req, res) => {
 
     const job = await Job.findById(jobId);
 
+
+
     if (!job) {
       return res.status(404).json({
         message: "Job not found"
@@ -328,7 +349,9 @@ export const deleteJob = async (req, res) => {
       });
     }
 
-    await Application.deleteMany({ job: jobId });
+    if (job.sourceType === "internal") {
+      await Application.deleteMany({ job: jobId });
+    }
 
     await Job.findByIdAndDelete(jobId);
 
