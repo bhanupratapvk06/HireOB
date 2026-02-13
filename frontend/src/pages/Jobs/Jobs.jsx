@@ -2,39 +2,17 @@ import JobCard from '../../components/JobCard/JobCard';
 import SideBar from '../../components/SideBar/SideBar';
 import { RiArrowDownSFill } from "react-icons/ri";
 import TopCompany from '../../components/TopCompany/TopCompany';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useJob } from '../../context/JobContext';
+import Loader from '../../components/Loader/Loader';
 import './Jobs.css';
+import { useEffect } from 'react';
 
 const Jobs = () => {
-    const [jobs, setJobs] = useState([]);
-    const [pageData, setPageData] = useState({
-        current: 1,
-        total: 0
-    });
-
-
-    const FetchJobs = async (page = 1,limit = 6) => {
-        try {
-            const res = await axios.get(`http://localhost:5000/api/job/getStudentJobs?page=${page}&limit=${limit}`);
-
-            if (res.status == 200) {
-                console.log(res);
-                setJobs(res.data.jobs);
-                setPageData({
-                    current: res.data.currentPage,
-                    total: res.data.totalPages
-                });
-            }
-        } catch (error) {
-            console.log('Fetching the Jobs Failed!', error);
-        }
-    }
+    const { jobs, pageData, fetchJobs, loading } = useJob();
 
     useEffect(() => {
-        FetchJobs();
+        fetchJobs();
     }, []);
-
 
     return (
         <div className='job-page'>
@@ -54,10 +32,20 @@ const Jobs = () => {
                     </div>
 
                     <div className='display-jobs'>
-                        {jobs.map((job) => (
-                            <JobCard job={job} />
-                        ))}
+                        {loading ? (
+                            <div className="loader-wrapper">
+                                <Loader />
+                            </div>
+                        ) : jobs.length > 0 ? (
+                            jobs.map((job) => (
+                                <JobCard key={job._id} job={job} />
+                            ))
+                        ) : (
+                            <p>No jobs found.</p>
+                        )}
                     </div>
+
+
 
                     <div className='pagination'>
                         {
@@ -65,7 +53,7 @@ const Jobs = () => {
                                 <div
                                     key={page}
                                     className={`pageNo ${page === pageData.current ? "active" : ""}`}
-                                    onClick={() => FetchJobs(page)}
+                                    onClick={() => fetchJobs(page)}
                                 >
                                     {page}
                                 </div>

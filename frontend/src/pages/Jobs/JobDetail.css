@@ -284,3 +284,11 @@
     font-size: 13px;
     color: rgba(0,0,0,0.6);
 }
+
+
+.loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

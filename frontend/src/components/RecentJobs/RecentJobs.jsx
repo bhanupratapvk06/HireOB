@@ -1,9 +1,17 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import JobCard from '../JobCard/JobCard';
-import assets from '../../assets/assets';
-import './RecentJobs.css'
+import { useJob } from '../../context/JobContext';
+import Loader from '../Loader/Loader';
+import './RecentJobs.css';
 
 const RecentJobs = () => {
+    const { jobs, loading, fetchJobs } = useJob();
+
+    useEffect(() => {
+        fetchJobs(1,4);
+    }, []);
+
     return (
         <div className='recents'>
             <div className='opening'>
@@ -15,9 +23,17 @@ const RecentJobs = () => {
             </div>
 
             <div className="listings">
-                {assets.jobs.map((job) => (
-                   <JobCard job = {job}/>
-                ))}
+                {loading ? (
+                    <div className="loader-wrapper">
+                        <Loader />
+                    </div>
+                ) : jobs.length > 0 ? (
+                    jobs.map((job) => (
+                        <JobCard key={job._id} job={job} />
+                    ))
+                ) : (
+                    <p>No jobs found.</p>
+                )}
             </div>
 
         </div>

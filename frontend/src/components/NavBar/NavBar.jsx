@@ -1,14 +1,22 @@
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+
 import "./NavBar.css";
+
 
 
 const NavBar = () => {
     const navigate = useNavigate();
+    const { logout, isAuthenticated } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+    };
+
     return (
         <nav>
             <div className="container">
-                <div onClick={()=>navigate('/')} className="logo">
+                <div onClick={() => navigate('/')} className="logo">
                     HireOB
                 </div>
 
@@ -20,12 +28,23 @@ const NavBar = () => {
                 </ul>
 
                 <div className="navButtons">
-                    <button onClick={()=> navigate('/login')}>Login</button>
-                    <button onClick={()=> navigate('/hire')}>Get Hired</button>
+                    {isAuthenticated ? (
+                        <button onClick={handleLogout}>
+                            Logout
+                        </button>
+                    ) : (
+                        <button onClick={() => navigate('/login')}>
+                            Login
+                        </button>
+                    )}
+
+                    <button onClick={() => navigate('/hire')}>
+                        Get Hired
+                    </button>
                 </div>
             </div>
         </nav>
     );
-}
+};
 
 export default NavBar;

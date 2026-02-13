@@ -109,3 +109,11 @@
     color: white;
     font-weight: 600;
 }
+
+
+.loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

@@ -1,18 +1,21 @@
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useJob } from "../../context/JobContext";
 import { IoBookmarkOutline, IoWalletOutline } from "react-icons/io5";
 import { PiClock } from "react-icons/pi";
 import { LuMapPin } from "react-icons/lu";
-import assets from "../../assets/assets";
 import JobCard from "../../components/JobCard/JobCard";
 import { MdOutlineStars } from "react-icons/md";
 import { LuGraduationCap } from "react-icons/lu";
 import { TiTick } from "react-icons/ti";
 import { FaRegUser } from "react-icons/fa6";
-import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
 import "./JobDetail.css";
+import Loader from "../../components/Loader/Loader";
 
 const JobDetail = () => {
+    const { jobs, loading, fetchJobs } = useJob();
     const location = useLocation();
     const job = location.state;
 
@@ -34,6 +37,10 @@ const JobDetail = () => {
 
     ];
 
+
+    useEffect(() => {
+        fetchJobs(1, 5);
+    }, []);
 
     return (
         <div className="detail">
@@ -130,8 +137,19 @@ const JobDetail = () => {
                             <h1>Related Jobs</h1>
                             <p>Some similar jobs are listed below.</p>
                             <div className="holder">
-                                {assets.jobs.map((job) => (<JobCard job={job} />))}
+                                {loading ? (
+                                    <div className="loader-wrapper">
+                                        <Loader />
+                                    </div>
+                                ) : jobs.length > 0 ? (
+                                    jobs.map((related) => (
+                                        <JobCard key={related._id} job={related} />
+                                    ))
+                                ) : (
+                                    <p>No related jobs found.</p>
+                                )}
                             </div>
+
                         </div>
                     </div>
                     <div className="jo">

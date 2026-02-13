@@ -5,10 +5,15 @@ import { FaGithub } from "react-icons/fa";
 import { FaArrowRightLong, FaEye, FaEyeSlash, FaFacebook } from "react-icons/fa6";
 import "./Auth.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import Loader from "../../components/Loader/Loader";
 
 
 const Auth = () => {
   const navigate = useNavigate();
+  const { login, register, loading } = useAuth();
+
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -18,7 +23,7 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [emailVerified, setEmailVerified] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
-  const [otp,setOtp] = useState("");
+  const [otp, setOtp] = useState("");
 
 
   const handleSendOtp = async () => {
@@ -51,8 +56,6 @@ const Auth = () => {
     }
   };
 
-
-
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -66,36 +69,19 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const endpoint = isRegister ? "register" : "login";
-
     try {
-      const res = await axios.post(
-        `http://localhost:5000/api/user/${endpoint}`,
-        formData
-      );
-
-      if (res.status === 200 || res.status === 201) {
-        console.log(res.data.message);
-        if (res.data.token) localStorage.setItem('token', res.data.token);
-
-        // optional: redirect or store token
-        // localStorage.setItem("token", res.data.token);
-        // navigate("/");
+      if (isRegister) {
+        await register(formData);
+      } else {
+        await login(formData.email, formData.password);
       }
 
-    } catch (error) {
-      const message =
-        error.response?.data?.message ||
-        error.message ||
-        "Something went wrong";
+      navigate("/");
 
-      console.log(
-        `${isRegister ? "Registration" : "Login"} failed: ${message}`
-      );
+    } catch (err) {
+      console.log(err);
     }
   };
-
-
 
 
 
@@ -242,15 +228,19 @@ const Auth = () => {
           {!isRegister && <p className="forgot">Forgot Password</p>}
 
 
-          <button onClick={handleSubmit} className="primary-btn">
-            {isRegister ? "Create Account" : "Sign in"}
+          <button onClick={handleSubmit} className="primary-btn" disabled={loading}>
+            {loading ? <Loader /> : (isRegister ? "Register" : "Login")}
           </button>
+
+
 
           <div className="socials">
             <div className="circle"><FcGoogle size={20} /></div>
             <div className="circle"><FaGithub color="black" size={20} /></div>
             <div className="circle"><FaFacebook size={20} color="#1575eb" /></div>
           </div>
+
+
 
           <button
             className="toggle-auth"
