@@ -18,50 +18,65 @@ main::before {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    filter: blur(20px);
-    transform: scale(1.1);
+    filter: blur(18px);
+    transform: scale(1.08);
+    z-index: -2;
+}
+
+main::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(10,10,10,0.65),
+        rgba(10,10,10,0.75)
+    );
     z-index: -1;
 }
 
-
-main .content-box{
-    width: 80%;
+main .content-box {
+    width: min(1100px, 90%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 70px;
+    gap: 60px;
     color: white;
+    text-align: center;
 }
 
-main .content-box .content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+
+main .content-box .content h3 {
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
 }
 
-main .content-box .content h3{
-    font-size: 68px;
-
-}
-main .content-box .content p{
-    font-size: 20px;
+main .content-box .content p {
+    font-size: 18px;
     font-weight: 300;
+    opacity: 0.85;
+    max-width: 700px;
 }
 
-main .search{
-    height: 70px;
-    width: 70%;
+main .search {
+    height: 72px;
+    width: min(900px, 95%);
     display: flex;
     align-items: center;
-    background-color: white;
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
-    color: gray;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+    transition: 0.25s ease;
 }
 
+main .search:hover {
+    transform: translateY(-2px);
+}
 
 main .search input,
 main .search select,
@@ -71,56 +86,52 @@ main .search button{
     border: none;
     outline: none;
     background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 16px;
+    padding: 0 18px;
     font-size: 15px;
 }
 
 main .search input:not(:last-child),
 main .search select:not(:last-child){
-    border-right: 1px solid gainsboro;
+    border-right: 1px solid rgba(0,0,0,0.08);
 }
 
-main .search button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+main .search button {
+    flex: 0.8;
     font-weight: 500;
-    background-color: var(--accent-color);
+    background: var(--accent-color);
     color: white;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
 }
 
-main .search button:hover{
-    background-color: var(--hover-color);
+main .search button:hover {
+    background: var(--hover-color);
     cursor: pointer;
 }
 
-
 main .stats{
     display: flex;
-    gap: 80px;
+    gap: 60px;
 }
 
 main .stats .stat-block{
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     color: white;
+    opacity: 0.95;
 }
 
-main .stats .stat-block .logo{
-    height: 60px;
-    width: 60px;
+main .stats .stat-block .logo {
+    height: 54px;
+    width: 54px;
+    border-radius: 50%;
+    background: rgba(48,150,137,0.15);
+    border: 1px solid rgba(48,150,137,0.4);
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 100%;
-    background-color: var(--accent-color);
+    justify-content: center;
 }
+
 
 main .companies {
     width: 100%;

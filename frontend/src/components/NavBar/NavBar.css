@@ -3,59 +3,60 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(18, 19, 20, 0.6);
-    backdrop-filter: blur(12px);
     z-index: 1000;
+
+    background: rgba(18, 19, 20, 0.65);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
 nav .container {
-    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 18px 40px;
+    justify-content: space-between;
+    padding: 16px 24px;
     color: white;
 }
 
 nav .logo {
     font-weight: 600;
     font-size: 20px;
+    letter-spacing: 0.4px;
+    transition: 0.2s ease;
 }
 
 nav .logo:hover {
+    opacity: 0.85;
     cursor: pointer;
-}
-
-nav .container .links {
-    display: flex;
-    list-style: none;
-    gap: 36px;
 }
 
 nav .links {
     display: flex;
     list-style: none;
-    gap: 36px;
+    gap: 28px;
 }
 
 nav .links a {
     text-decoration: none;
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
     position: relative;
-    transition: 0.25s ease;
+    padding: 6px 0;
+    transition: all 0.25s ease;
 }
 
 nav .links a::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: -6px;
+    left: 50%;
+    bottom: -4px;
     width: 0%;
     height: 2px;
-    background: white;
-    transition: 0.3s ease;
+    background: var(--accent-color);
+    transform: translateX(-50%);
+    transition: 0.25s ease;
 }
 
 nav .links a:hover {
@@ -63,45 +64,33 @@ nav .links a:hover {
 }
 
 nav .links a:hover::after {
-    width: 100%;
+    width: 60%;
 }
-
 
 
 nav .navButtons {
     display: flex;
-    gap: 12px;
+    gap: 10px;
 }
 
-
 nav .navButtons button {
-    padding: 8px 20px;
-    border-radius: 6px;
+    padding: 8px 18px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     color: white;
-    background-color: var(--accent-color);
+    background: var(--accent-color);
+    border: none;
     transition: all 0.25s ease;
 }
 
 nav .navButtons button:first-child {
     background: transparent;
-    border: 1px solid white;
-    color: white;
-}
-
-nav .navButtons button:hover {
-    transform: translateY(-1px);
-    opacity: 0.85;
-}
-
-nav .navButtons button:first-child {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255,255,255,0.35);
 }
 
 nav .navButtons button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }

@@ -1,4 +1,4 @@
-.detail .opening{
+.detail .opening {
     min-height: 45vh;
     width: 100%;
     display: flex;
@@ -9,13 +9,13 @@
     font-size: 36px;
 }
 
-.detail .detail-region{
+.detail .detail-region {
     padding-top: 40px;
     width: 90%;
     margin: auto;
 }
 
-.detail-region .title-section{
+.detail-region .title-section {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -44,7 +44,7 @@
     gap: 18px;
 }
 
-.detail-region .title-section .position-info .info{
+.detail-region .title-section .position-info .info {
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -86,11 +86,14 @@
     color: white;
     background-color: var(--accent-color);
     box-shadow: 0px 4px 5px rgba(48, 150, 137, 0.15);
+    border: none;
     transition: all 0.1s ease;
 }
 
 .detail-region .title-section .job-details button:hover {
     background-color: var(--hover-color);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(69, 255, 187, 0.25);
     cursor: pointer;
 }
 
@@ -111,7 +114,7 @@
     color: var(--secondary-text-color);
 }
 
-.detail-region .title-section .job-details .tags{
+.detail-region .title-section .job-details .tags {
     display: flex;
     gap: 6px;
 }
@@ -131,7 +134,7 @@
     font-weight: 400;
 }
 
-.detail-region .job-about{
+.detail-region .job-about {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -139,59 +142,60 @@
 }
 
 
-.detail-region .job-about{
+.detail-region .job-about {
     display: flex;
     gap: 3%;
 }
 
-.detail-region .job-about .jd{
+.detail-region .job-about .jd {
     flex: 1;
 }
 
-.detail-region .job-about .jo{
+.detail-region .job-about .jo {
     width: 320px;
 }
 
 
-.detail-region .job-about .jd{
+.detail-region .job-about .jd {
     width: 75%;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.detail-region .job-about .jd .description{
+.detail-region .job-about .jd .description {
     display: flex;
     flex-direction: column;
     gap: 12px;
     font-size: 16px;
 }
 
-.detail-region .job-about .jd .responsibilities{
+.detail-region .job-about .jd .responsibilities {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
-.detail-region .job-about .jd .responsibilities div{
+
+.detail-region .job-about .jd .responsibilities div {
     display: flex;
     gap: 3px;
     font-size: 16px;
 }
 
 
-.detail-region .job-about .jd .skills{
+.detail-region .job-about .jd .skills {
     display: flex;
     flex-direction: column;
     gap: 12px;
     font-size: 16px;
 }
 
-.detail-region .job-about .jd .skills .tags{
+.detail-region .job-about .jd .skills .tags {
     display: flex;
     gap: 6px;
 }
 
-.detail-region .job-about .jd .skills .tags div{
+.detail-region .job-about .jd .skills .tags div {
     padding: 5px 8px;
     background-color: var(--noty-color);
     display: flex;
@@ -199,27 +203,109 @@
     justify-content: center;
     border-radius: 5px;
 }
+
 .detail-region .job-about .jd .skills .tags div p {
     font-size: 14px;
     color: var(--secondary-text-color);
     font-weight: 400;
 }
 
-.detail-region .job-about .jd .related{
+.detail-region .job-about .jd .related {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.detail-region .job-about .jd .related .holder{
+.detail-region .job-about .jd .related .holder {
     margin-top: 10px;
     display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.related-card {
+    min-width: 260px;
+    background-color: var(--noty-color);
+    padding: 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all .2s ease;
+    display: flex;
     flex-direction: column;
-    gap: 20px;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.rc-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rc-logo {
+    height: 36px;
+    width: 36px;
+    background: black;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rc-company {
+    font-size: 14px;
+    color: var(--secondary-text-color);
+}
+
+.rc-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--secondary-text-color);
+}
+
+.rc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.rc-tags span {
+    background-color: white;
+    padding: 3px 7px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.rc-apply {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.rc-apply:hover {
+    background-color: var(--hover-color);
 }
 
 
-.detail-region .job-about .jo{
+.detail-region .job-about .jo {
+    position: sticky;
+    top: 100px;
+}
+
+
+.detail-region .job-about .jo {
     width: 22%;
     padding: 20px;
     border-radius: 24px;
@@ -231,19 +317,19 @@
 }
 
 
-.detail-region .job-about .jo h3{
+.detail-region .job-about .jo h3 {
     font-size: 20px;
     font-weight: 600;
 }
 
 
-.detail-region .job-about .jo .overview{
+.detail-region .job-about .jo .overview {
     display: flex;
     flex-direction: column;
     gap: 14px;
 }
 
-.detail-region .job-about .jo .overview .over-card{
+.detail-region .job-about .jo .overview .over-card {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -255,13 +341,13 @@
     transition: all .2s ease;
 }
 
-.detail-region .job-about .jo .overview .over-card:hover{
+.detail-region .job-about .jo .overview .over-card:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
 
 
-.detail-region .job-about .jo .overview .over-card .logo{
+.detail-region .job-about .jo .overview .over-card .logo {
     height: 38px;
     min-width: 38px;
     border-radius: 10px;
@@ -270,19 +356,19 @@
     align-items: center;
     justify-content: center;
 
-    background-color: rgba(48,150,137,0.12);
+    background-color: rgba(48, 150, 137, 0.12);
     color: var(--accent-color);
 }
 
 
-.detail-region .job-about .jo .overview .over-card h4{
+.detail-region .job-about .jo .overview .over-card h4 {
     font-size: 14px;
     font-weight: 600;
 }
 
-.detail-region .job-about .jo .overview .over-card p{
+.detail-region .job-about .jo .overview .over-card p {
     font-size: 13px;
-    color: rgba(0,0,0,0.6);
+    color: rgba(0, 0, 0, 0.6);
 }
 
 
@@ -292,3 +378,4 @@
     align-items: center;
     height: 100vh;
 }
+

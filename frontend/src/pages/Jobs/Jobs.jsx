@@ -8,11 +8,18 @@ import './Jobs.css';
 import { useEffect } from 'react';
 
 const Jobs = () => {
-    const { jobs, pageData, fetchJobs, loading } = useJob();
+    const { jobs, pageData, fetchJobs, loading} = useJob();
 
     useEffect(() => {
-        fetchJobs();
+        console.log(pageData);
+        fetchJobs(1, 6);
     }, []);
+
+    const handlePageChange = (page) => {
+        fetchJobs(page, 6);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
 
     return (
         <div className='job-page'>
@@ -24,7 +31,8 @@ const Jobs = () => {
                 <SideBar />
                 <div className='search-region'>
                     <div className='options'>
-                        <p>{`Showing ${pageData.current} of ${pageData.total} results`}</p>
+                        <p>{`Page ${pageData.current} of ${pageData.total}`}</p>
+
                         <div className='sort-btn'>
                             <p>Sort By Latest</p>
                             <RiArrowDownSFill size={30} />
@@ -53,7 +61,7 @@ const Jobs = () => {
                                 <div
                                     key={page}
                                     className={`pageNo ${page === pageData.current ? "active" : ""}`}
-                                    onClick={() => fetchJobs(page)}
+                                    onClick={() => handlePageChange(page)}
                                 >
                                     {page}
                                 </div>
