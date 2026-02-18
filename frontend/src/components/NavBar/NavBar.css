@@ -91,6 +91,11 @@
     justify-content: center;
 }
 
+.NavBar .user-actions{
+    display: flex;
+    gap: 10px;
+}
+
 .NavBar .primary {
     background: hsl(var(--primary));
     color: hsl(var(--primary-foreground));

@@ -114,20 +114,11 @@ export const userLogin = async (req, res) => {
       });
     }
 
-    const token = createToken({
-      id: user._id,
-      role: user.role
-    });
+    const token = createToken(user);
 
     return res.status(200).json({
       message: "User LoggedIn successfully!",
-      token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        role: user.role
-      }
+      token
     });
 
   } catch (error) {
@@ -137,6 +128,39 @@ export const userLogin = async (req, res) => {
     });
   }
 };
+
+export const fetchUser = async (req, res) => {
+  try {
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized"
+      });
+    }
+
+    const user = await User.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      user
+    });
+
+  } catch (error) {
+    console.error("Fetch user error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
 
 export const deleteUser = async (req, res) => {
   try {

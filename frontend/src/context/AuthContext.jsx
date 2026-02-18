@@ -1,4 +1,5 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+
 import axios from "axios";
 
 const AuthContext = createContext();
@@ -8,12 +9,18 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const authHeader = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+
     const register = async (formData) => {
         try {
             setLoading(true);
 
             const res = await axios.post(
-                "http://localhost:5000/api/user/register",
+                "http://localhost:5000/api/users/register",
                 formData
             );
 
@@ -36,7 +43,7 @@ export const AuthProvider = ({ children }) => {
             setLoading(true);
 
             const res = await axios.post(
-                "http://localhost:5000/api/user/login",
+                "http://localhost:5000/api/users/login",
                 { email, password }
             );
 
@@ -46,17 +53,36 @@ export const AuthProvider = ({ children }) => {
             setToken(receivedToken);
 
         } catch (error) {
-            console.error("Login failed:", error.response?.data?.message);
+            throw error.response?.data?.message || "Login failed";
         } finally {
             setLoading(false);
         }
     };
+
+    const fetchUser = async () => {
+        if (!token) return;
+
+        try {
+            const res = await axios.get(
+                "http://localhost:5000/api/users/me",
+                authHeader
+            );
+            setUser(res.data.user);
+        } catch {
+            logout();
+        }
+    };
+
 
     const logout = () => {
         localStorage.removeItem("token");
         setToken(null);
         setUser(null);
     };
+
+    useEffect(() => {
+        fetchUser();
+    }, [token])
 
 
     const authValue = useMemo(() => ({

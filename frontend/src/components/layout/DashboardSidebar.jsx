@@ -1,10 +1,11 @@
+import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, Briefcase, Globe, User, Building2, BarChart3, Settings,
   ChevronLeft, ChevronRight,
 } from 'lucide-react';
-import { useState } from 'react';
 import './DashboardSidebar.css';
+import { useAuth } from '../../context/AuthContext';
 
 const navItems = [
   { title: 'Overview', path: '/', icon: LayoutDashboard },
@@ -17,8 +18,10 @@ const navItems = [
 ];
 
 export function DashboardSidebar() {
+  const {user} = useAuth();
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+
   return (
     <aside className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`}>
       <div className="sidebar-header">
@@ -54,8 +57,8 @@ export function DashboardSidebar() {
           <div className="sidebar-user">
             <div className="sidebar-avatar gradient-primary">JD</div>
             <div className="sidebar-user-info">
-              <p className="sidebar-user-name">John Doe</p>
-              <p className="sidebar-user-email">john.doe@email.com</p>
+              <p className="sidebar-user-name">{user.username}</p>
+              <p className="sidebar-user-email">{user.email}</p>
             </div>
           </div>
         </div>
