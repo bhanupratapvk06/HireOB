@@ -1,0 +1,110 @@
+.resume-card{
+    height: 180px;
+    width: 100%;
+
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 18px 16px;
+    transition: .18s ease;
+}
+
+.resume-card:hover{
+    box-shadow: 0 12px 28px rgba(0,0,0,.08);
+}
+
+.score-section{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.circle{
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+    font-size: 18px;
+
+    background:
+        conic-gradient(var(--scoreColor) calc(var(--score, 70) * 1%), #e5e7eb 0);
+
+    position: relative;
+}
+
+.circle::before{
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+}
+
+.circle span{
+    position: relative;
+    z-index: 1;
+}
+
+
+.match-text{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.status{
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.sub{
+    font-size: 12px;
+    color: var(--muted-foreground);
+}
+
+.resume-actions{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.resume-actions button{
+    height: 36px;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .18s ease;
+}
+
+
+.improve{
+    background: var(--secondary);
+    border: 1px solid var(--border);
+}
+
+.improve:hover{
+    background: #e5e7eb;
+}
+
+
+.apply{
+    background: var(--accent-color);
+    border: none;
+    color: white;
+}
+
+.apply:hover{
+    background: var(--hover-color);
+}

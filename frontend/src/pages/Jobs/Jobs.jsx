@@ -1,14 +1,15 @@
 import JobCard from '../../components/JobCard/JobCard';
-import SideBar from '../../components/SideBar/SideBar';
 import { RiArrowDownSFill } from "react-icons/ri";
 import TopCompany from '../../components/TopCompany/TopCompany';
 import { useJob } from '../../context/JobContext';
 import Loader from '../../components/Loader/Loader';
 import './Jobs.css';
 import { useEffect } from 'react';
+import JobSideBar from '../../components/JobSideBar/JobSideBar';
+import ResumeMatch from '../../components/ResumeMatch';
 
 const Jobs = () => {
-    const { jobs, pageData, fetchJobs, loading} = useJob();
+    const { jobs, pageData, fetchJobs, loading } = useJob();
 
     useEffect(() => {
         console.log(pageData);
@@ -28,7 +29,7 @@ const Jobs = () => {
             </div>
 
             <div className='job-region'>
-                <SideBar />
+                <JobSideBar />
                 <div className='search-region'>
                     <div className='options'>
                         <p>{`Page ${pageData.current} of ${pageData.total}`}</p>
@@ -46,13 +47,15 @@ const Jobs = () => {
                             </div>
                         ) : jobs.length > 0 ? (
                             jobs.map((job) => (
-                                <JobCard key={job._id} job={job} />
+                                <div className="job-row" key={job._id}>
+                                    <JobCard job={job} />
+                                    <ResumeMatch job={job} />
+                                </div>
                             ))
                         ) : (
                             <p>No jobs found.</p>
                         )}
                     </div>
-
 
 
                     <div className='pagination'>

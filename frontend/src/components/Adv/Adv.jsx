@@ -22,7 +22,7 @@ const Adv = () => {
 
 
     return (
-        <div className="container">
+        <div className="adv">
             <div className='quote-block'>
                 <div className='cover'>
                     {/* Cover Image */}
@@ -59,7 +59,7 @@ const Adv = () => {
                     ))
                 }
             </div>
-            <div className='jobs'>
+            <div className='adv-last'>
                 <div className='jobs-content'>
                     <h1>Create A Better Future For Yourself</h1>
                     <p>

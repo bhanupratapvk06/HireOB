@@ -113,7 +113,6 @@ export const listAppliedJobs = async (req, res) => {
     }
 };
 
-
 export const viewApplicants = async (req, res) => {
 
     try {
@@ -172,7 +171,7 @@ export const viewApplicants = async (req, res) => {
 export const updateApplicationStatus = async (req, res) => {
     try {
         const { status } = req.body;
-        const applicationId = req.params.id;
+        const applicationId = req.params.applicationId;
         const allowedStatus = [
             "Submitted",
             "Viewed",

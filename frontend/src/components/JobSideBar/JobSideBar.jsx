@@ -1,7 +1,7 @@
-import "./SideBar.css";
+import "./JobSideBar.css";
 import assets from "../../assets/assets";
 
-const SideBar = () => {
+const JobSideBar = () => {
 
     const filterSections = [
         { title: "Category", data: assets.categories },
@@ -11,8 +11,8 @@ const SideBar = () => {
     ];
 
     return (
-        <div className="sidemain">
-            <div className="sidebar">
+        <div className="job-sidemain">
+            <div className="job-sidebar">
 
                 <div className="search-title">
                     <h2>Search By Job Title</h2>
@@ -54,12 +54,8 @@ const SideBar = () => {
                 </div>
 
             </div>
-            <div className="hiring">
-                <h2>WE ARE HIRING</h2>
-                <p>Apply Today!</p>
-            </div>
         </div>
     );
 };
 
-export default SideBar;
+export default JobSideBar;

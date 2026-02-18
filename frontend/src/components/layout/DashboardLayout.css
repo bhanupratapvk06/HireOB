@@ -1,0 +1,22 @@
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: hsl(var(--background));
+}
+.dashboard-main {
+  flex: 1;
+  overflow: auto;
+}
+.dashboard-content {
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  max-width: 200rem;
+  margin: 0 auto;
+}
+@media (min-width: 1024px) {
+  .dashboard-content {
+    padding: 2rem;
+  }
+}

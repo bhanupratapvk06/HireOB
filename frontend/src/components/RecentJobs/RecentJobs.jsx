@@ -4,12 +4,13 @@ import JobCard from '../JobCard/JobCard';
 import { useJob } from '../../context/JobContext';
 import Loader from '../Loader/Loader';
 import './RecentJobs.css';
+import ResumeMatch from '../ResumeMatch';
 
 const RecentJobs = () => {
     const { jobs, loading, fetchJobs } = useJob();
 
     useEffect(() => {
-        fetchJobs(1,4);
+        fetchJobs(1, 4);
     }, []);
 
     return (
@@ -28,13 +29,17 @@ const RecentJobs = () => {
                         <Loader />
                     </div>
                 ) : jobs.length > 0 ? (
-                    jobs.map((job) => (
-                        <JobCard key={job._id} job={job} />
+                    jobs.map(job => (
+                        <div className="job-row" key={job._id}>
+                            <JobCard job={job} />
+                            <ResumeMatch job={job} />
+                        </div>
                     ))
                 ) : (
                     <p>No jobs found.</p>
                 )}
             </div>
+
 
         </div>
     );

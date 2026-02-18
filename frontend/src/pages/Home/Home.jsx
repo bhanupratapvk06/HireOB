@@ -1,4 +1,3 @@
-import './Home.css'
 import RecentJobs from "../../components/RecentJobs/RecentJobs";
 import HeroSection from "../../components/Hero Section/HeroSection";
 import BrowseCategory from '../../components/BrowseCategory/BrowseCategory';

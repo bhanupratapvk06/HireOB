@@ -1,7 +1,7 @@
 import express from "express";
 
-import {checkAuth} from "../middlewares/role.js";
-import {authMiddleware} from "../middlewares/auth.js";
+import { checkAuth } from "../middlewares/role.js";
+import { authMiddleware } from "../middlewares/auth.js";
 
 import {
   createJob,
@@ -15,15 +15,14 @@ import { getJobsLimiter } from "../middlewares/rateLimiter.js";
 
 const router = express.Router();
 
+router.post('/', authMiddleware, checkAuth("recruiter"), createJob);
 
-router.post('/createjob',authMiddleware,checkAuth("recruiter"),createJob);
+router.patch('/:jobId', authMiddleware, checkAuth("recruiter"), editJob);
 
-router.patch('/editJob/:jobId',authMiddleware,checkAuth("recruiter"),editJob);
+router.delete('/:jobId', authMiddleware, checkAuth("recruiter"), deleteJob);
 
-router.delete('/deleteJob/:jobId',authMiddleware,checkAuth("recruiter"),deleteJob);
+router.get('/my-jobs', authMiddleware, checkAuth("recruiter"), getRecruiterPostedJobs);
 
-router.get('/getPostedJobs',authMiddleware,checkAuth('recruiter'),getRecruiterPostedJobs);
-
-router.get('/getStudentJobs',getJobsLimiter,getJobsForStudent);
+router.get('/', getJobsLimiter, getJobsForStudent);
 
 export default router;

@@ -1,96 +1,208 @@
-nav {
+.NavBar {
+    --nav-h: 64px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
 
-    background: rgba(18, 19, 20, 0.65);
+    background: hsl(var(--sidebar-background) / 0.75);
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid hsl(var(--sidebar-border));
 }
 
-nav .container {
-    max-width: 1200px; 
+.NavBar .container {
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 24px;
-    color: white;
+    max-width: var(--container);
+    padding: var(--space-sm) var(--space-lg);
+    color: hsl(var(--sidebar-foreground));
 }
 
-nav .logo {
+.NavBar .logo {
     font-weight: 600;
-    font-size: 20px;
+    font-size: var(--fs-lg);
     letter-spacing: 0.4px;
-    transition: 0.2s ease;
+    color: hsl(var(--sidebar-accent-foreground));
+    text-decoration: none;
+    transition: opacity .2s ease;
 }
 
-nav .logo:hover {
-    opacity: 0.85;
-    cursor: pointer;
+.NavBar .logo:hover {
+    opacity: .85;
 }
 
-nav .links {
+.NavBar .links {
     display: flex;
     list-style: none;
-    gap: 28px;
+    gap: 26px;
 }
 
-nav .links a {
+.NavBar .links a {
     text-decoration: none;
-    font-size: 15px;
-    color: rgba(255,255,255,0.75);
+    font-size: var(--fs-md);
+    color: hsl(var(--muted-foreground));
     position: relative;
     padding: 6px 0;
-    transition: all 0.25s ease;
+    transition: color .2s ease;
 }
 
-nav .links a::after {
+.NavBar .links a::after {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: -4px;
+    bottom: -5px;
     width: 0%;
     height: 2px;
-    background: var(--accent-color);
+    background: hsl(var(--primary));
     transform: translateX(-50%);
-    transition: 0.25s ease;
+    transition: width .25s ease;
 }
 
-nav .links a:hover {
-    color: white;
+.NavBar .links a:hover {
+    color: hsl(var(--sidebar-accent-foreground));
 }
 
-nav .links a:hover::after {
-    width: 60%;
+.NavBar .links a:hover::after {
+    width: 65%;
 }
 
-
-nav .navButtons {
+.NavBar .navButtons {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 
-nav .navButtons button {
-    padding: 8px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
+.NavBar .navButtons button,
+.NavBar .navButtons a {
+    border-radius: var(--radius);
+    font-size: var(--fs-md);
+    padding: 0.5em 1em;
     font-weight: 500;
-    color: white;
-    background: var(--accent-color);
+    cursor: pointer;
+    transition: all .2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.NavBar .primary {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
     border: none;
-    transition: all 0.25s ease;
 }
 
-nav .navButtons button:first-child {
+.NavBar .primary:hover {
+    background: hsl(var(--primary) / 0.85);
+    transform: translateY(-1px);
+}
+
+.NavBar .secondary {
+    background: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    border: 1px solid hsl(var(--border));
+}
+
+.NavBar .secondary:hover {
+    background: hsl(var(--muted));
+}
+
+.NavBar .ghost {
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.35);
+    color: hsl(var(--muted-foreground));
+    border: 1px solid transparent;
 }
 
-nav .navButtons button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+.NavBar .ghost:hover {
+    background: hsl(var(--sidebar-accent));
+    color: hsl(var(--sidebar-accent-foreground));
+}
+
+.menu-toggle{
+    display: none;
+    font-size: 22px;
+    background: transparent;
+    border: none;
+    color: hsl(var(--sidebar-foreground));
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 1200px){
+
+  .NavBar .links{
+    gap: 18px;
+  }
+
+  .NavBar .container{
+    padding: 12px 20px;
+  }
+
+  .NavBar .navButtons a,
+  .NavBar .navButtons button{
+    padding: 0.45em 0.9em;
+    font-size: 14px;
+  }
+}
+
+
+@media (max-width: 900px){
+
+  .NavBar .navButtons .secondary{
+    display: none;
+  }
+
+  .NavBar .links{
+    gap: 14px;
+  }
+}
+
+@media (max-width: 768px){
+
+  .menu-toggle{
+    display: block;
+  }
+
+  .NavBar .links{
+    position: fixed;
+    top: var(--nav-h);
+    right: -100%;
+    width: 260px;
+    height: calc(100vh - var(--nav-h));
+    background: hsl(var(--sidebar-background));
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+    transition: right .35s cubic-bezier(.4,0,.2,1);
+    border-left: 1px solid hsl(var(--border));
+  }
+
+  .NavBar.open .links{
+    right: 0;
+  }
+
+  .NavBar .navButtons{
+    display: none;
+  }
+}
+
+@media (max-width: 480px){
+
+  .NavBar{
+    --nav-h: 58px;
+  }
+
+  .NavBar .logo{
+    font-size: 18px;
+  }
+
+  .NavBar .links a{
+    font-size: 16px;
+  }
 }

@@ -7,6 +7,7 @@ import JobRoutes from "./routes/job.routes.js";
 import OtpRoutes from "./routes/otp.routes.js";
 import ApplicationRoutes from "./routes/application.routes.js";
 import jobExpiryCron from "./cron/JobExpiry.js";
+import ProfileRoutes from './routes/profile.routes.js';
 dotenv.config();
 
 ConnectDB();
@@ -32,10 +33,12 @@ app.get('/',async(req,res)=>{
     });
 });
 
-app.use('/api/user',UserRoutes);
+app.use('/api/users',UserRoutes);
 app.use('/api/otp',OtpRoutes);
-app.use('/api/job',JobRoutes);
+app.use('/api/jobs',JobRoutes);
+app.use('/api/profile',ProfileRoutes);
 app.use('/api/application',ApplicationRoutes);
+// app.use("/uploads", express.static("uploads"));
 
 jobExpiryCron();
 

@@ -240,8 +240,6 @@ const Auth = () => {
             <div className="circle"><FaFacebook size={20} color="#1575eb" /></div>
           </div>
 
-
-
           <button
             className="toggle-auth"
             onClick={() => setIsRegister(!isRegister)}

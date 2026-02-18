@@ -1,0 +1,43 @@
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 640px;
+}
+.settings-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pref-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pref-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pref-label { font-size: 0.875rem; font-weight: 500; }
+.pref-desc { font-size: 0.75rem; color: hsl(var(--muted-foreground)); }
+.card-danger {
+  border-color: hsl(var(--destructive) / 0.3);
+}
+.delete-warning {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 1rem;
+}
+.delete-list {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}

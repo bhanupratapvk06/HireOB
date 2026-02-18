@@ -1,177 +1,292 @@
-.about .opening{
-    min-height:45vh;
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:black;
-    color:white;
-    font-size:36px;
+.about .opening {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(var(--sidebar-background));
+    color: white;
+    min-height: clamp(180px, 32vh, 420px);
+    padding-top: 80px;
+    font-size: clamp(26px, 3vw, 36px);
+    text-align: center;
 }
 
-.about-container{
-    width:90%;
-    margin:auto;
-    padding-top:40px;
+.about-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(40px, 6vw, 70px) 20px clamp(20px, 4vw, 30px);
+    gap: clamp(40px, 6vw, 80px);
 }
 
-.about-container .info{
-    display:flex;
-    flex-direction:column;
-    gap:30px;
+.about-container .info {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 }
 
-.about-container .info .content{
-    display:flex;
-    gap:40px;
+.about-container .info .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
 }
 
-.about-container .info .content h1{
-    width:50%;
-    font-size:28px;
-    font-weight:600;
+.about-container .info h1 {
+    font-size: clamp(24px, 2.2vw, 32px);
+    line-height: 1.35;
+    font-weight: 600;
+    color: var(--foreground);
 }
 
-.about-container .info .content p{
-    width:50%;
-    font-size:16px;
-    color:var(--secondary-text-color);
-    line-height:1.6;
+.about-container .info p {
+    color: var(--muted-foreground);
+    line-height: 1.8;
+    font-size: clamp(14px, 1.1vw, 16px);
 }
 
-.about-container .how-it-works{
-    margin-top:80px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-    background:#f8fbfb;
-    padding:60px 40px;
-    border-radius:20px;
+
+.how-it-works {
+    background: #f7fbfa;
+    padding: clamp(26px, 4vw, 60px);
+    border-radius: 22px;
+    border: 1px solid rgba(48, 150, 137, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.about-container .how-it-works h1{
-    font-size:30px;
-    font-weight:600;
+.how-it-works h1 {
+    font-size: 30px;
+    font-weight: 600;
 }
 
-.about-container .how-it-works p{
-    font-size:16px;
-    color:var(--secondary-text-color);
-    max-width:700px;
+.how-it-works>p {
+    max-width: 650px;
+    color: var(--muted-foreground);
 }
 
-.about-container .how-it-works .steps{
-    margin-top:30px;
-    display:flex;
-    gap:20px;
+
+.how-it-works .video {
+    margin-top: 35px;
+    display: grid;
+    grid-template-columns: minmax(260px, 420px) 1fr;
+    gap: clamp(24px, 4vw, 50px);
+    align-items: center;
 }
 
-.about-container .how-it-works .step-card{
-    flex:1;
-    padding:30px 20px;
-    background:white;
-    border-radius:16px;
-    border:1px solid rgba(0,0,0,0.05);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    gap:12px;
-    transition:.25s ease;
+
+.how-it-works .play {
+    height: clamp(180px, 24vw, 260px);
+    border-radius: 18px;
+    background: linear-gradient(135deg, #1c5d55, #309689);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 }
 
-.about-container .how-it-works .step-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
 }
 
-.about-container .how-it-works .step-card .icon{
-    height:50px;
-    width:50px;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--noty-color);
-    color:var(--accent-color);
+.step-card {
+    background: white;
+    padding: 24px 22px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: .25s ease;
 }
 
-.about-container .how-it-works .step-card h3{
-    font-size:18px;
-    font-weight:600;
+.step-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 }
 
-.about-container .how-it-works .step-card p{
-    font-size:14px;
-    color:var(--secondary-text-color);
+.step-card .icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(48, 150, 137, .12);
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.about-container .faqs{
-    margin-top:80px;
-    margin-bottom: 50px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+.step-card h3 {
+    font-size: 17px;
+    font-weight: 600;
 }
 
-.about-container .faqs h1{
-    font-size:30px;
-    font-weight:600;
+.step-card p {
+    font-size: 14.5px;
+    color: var(--muted-foreground);
+    line-height: 1.6;
 }
 
-.about-container .faqs p{
-    color:var(--secondary-text-color);
+
+.faqs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.about-container .faqs .cards{
-    margin-top:20px;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
+.faqs h1 {
+    font-size: 30px;
+    font-weight: 600;
 }
 
-.about-container .faqs .faq{
-    display:flex;
-    align-items:flex-start;
-    gap:20px;
-    padding:20px;
-    border-radius:16px;
-    background:var(--noty-color);
-    transition:.2s ease;
+.faqs>p {
+    color: var(--muted-foreground);
 }
 
-.about-container .faqs .faq:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 24px rgba(0,0,0,0.06);
+.cards {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.about-container .faqs .faq > div:first-child{
-    font-size:22px;
-    font-weight:600;
-    color:var(--accent-color);
+
+.faq {
+    background: #f7fbfa;
+    border: 1px solid rgba(48, 150, 137, .08);
+    padding: 20px 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    border-radius: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    transition: .25s ease;
 }
 
-.about-container .faqs .faq h1{
-    font-size:18px;
-    font-weight:600;
+.faq:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
 }
 
-.about-container .faqs .faq p{
-    margin-top:6px;
-    font-size:15px;
-    color:var(--secondary-text-color);
+.faq>div:nth-child(2) {
+    flex: 1;
+    min-width: 220px;
 }
 
-.about-container .faqs .open-btn{
-    margin-left:auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    transition:.2s ease;
+.open-btn {
+    margin-left: 0;
 }
 
-.about-container .faqs .open-btn:hover{
-    color:var(--accent-color);
-    transform:scale(1.1);
+.faq>div:first-child {
+    font-weight: 600;
+    color: var(--accent-color);
+    min-width: 32px;
+}
+
+.faq h1 {
+    font-size: 16.5px;
+}
+
+.faq p {
+    margin-top: 6px;
+    font-size: 14.5px;
+    color: var(--muted-foreground);
+    line-height: 1.6;
+}
+
+.open-btn {
+    margin-left: auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+}
+
+.open-btn:hover {
+    transform: scale(1.12);
+}
+
+@media (max-width:1000px) {
+
+    .about-container .info .content {
+        grid-template-columns: 1fr;
+    }
+
+    .how-it-works .video {
+        grid-template-columns: 1fr;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width:900px){
+
+    .about .opening{
+        min-height:220px;
+    }
+
+    .about-container .info .content{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .how-it-works .video{
+        grid-template-columns:1fr;
+    }
+
+    .steps{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+
+@media (max-width:600px){
+
+    .about-container{
+        gap:40px;
+    }
+
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .faq{
+        padding:18px;
+    }
+
+    .faq h1{
+        font-size:15px;
+    }
+
+    .faq p{
+        font-size:14px;
+    }
+
+    .how-it-works h1,
+    .faqs h1{
+        font-size:22px;
+    }
+}
+
+
+@media (max-width:380px){
+
+    .about-container{
+        padding:30px 14px;
+    }
+
+    .step-card{
+        padding:18px;
+    }
+
+    .about-container .info h1{
+        font-size:22px;
+    }
 }

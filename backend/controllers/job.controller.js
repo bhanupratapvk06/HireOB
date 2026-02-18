@@ -78,8 +78,6 @@ export const createJob = async (req, res) => {
   }
 };
 
-
-
 export const getJobsForStudent = async (req, res) => {
   try {
     const {

@@ -33,7 +33,7 @@ export const JobProvider = ({ children }) => {
             });
 
             const res = await axios.get(
-                `http://localhost:5000/api/job/getStudentJobs?${params}`
+                `http://localhost:5000/api/jobs/?${params}`
             );
 
             if (res.status === 200) {

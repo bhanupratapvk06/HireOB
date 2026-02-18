@@ -1,48 +1,94 @@
-
 .recents{
     width: 100%;
-    padding: 50px;
-}
-
-.recents .opening{
+    padding: 90px 40px;
+    background: white;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 40px;
+}
+
+
+.recents .opening{
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .recents .opening h1{
-    font-size: 36px;
+    font-size: 38px;
     font-weight: 600;
+    color: var(--foreground);
 }
 
 .recents .opening div{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
-.recents .opening div a{
-    font-size: 20px;
+.recents .opening p{
+    max-width: 720px;
+    color: var(--muted-foreground);
+    line-height: 1.6;
+}
+
+.recents .opening a{
+    white-space: nowrap;
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    background: var(--accent-color);
+    color: white;
     font-weight: 500;
-    color: var(--accent-color);
-    transition: all 0.1s ease;
+    transition: all .2s ease;
 }
 
-.recents .opening div a:hover{
-    color: var(--hover-color);
+.recents .opening a:hover{
+    background: var(--hover-color);
+    transform: translateY(-2px);
 }
 
-.recents .listings{
-    margin-top: 28px;
-    padding: 16px;
+.listings{
+    width: 100%;
+    max-width: 1200px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 22px;
+}
+
+.job-row{
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.job-row > *{
+    min-width: 0;
 }
 
 
-.loader-wrapper {
+.loader-wrapper{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 80px 0;
+}
+
+.listings > p{
+    text-align: center;
+    color: var(--muted-foreground);
+    padding: 60px 0;
+}
+
+
+@media (max-width: 1000px){
+    .job-row{
+        grid-template-columns: 1fr;
+    }
 }
